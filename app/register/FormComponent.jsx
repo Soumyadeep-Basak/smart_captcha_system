@@ -19,7 +19,20 @@ const FormComponent = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const [loading, setLoading] = useState(false);
 
+  const runSeleniumScript = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/bot', { method: 'GET' });
+      const data = await res.text();
+      console.log('Selenium response:', data);
+    } catch (error) {
+      console.error('Error running Selenium script:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,9 +97,15 @@ const FormComponent = () => {
 
       <div className="bg-white p-6 rounded-md shadow-md">
         <h2 className="text-lg font-medium mb-2">Fill the Form:</h2>
-        <form id="event-form" className="space-y-4 max-w-[50%] " onSubmit={handleSubmit}>
+        <form
+          id="event-form"
+          className="space-y-4 max-w-[50%] "
+          onSubmit={handleSubmit}
+        >
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-1">Name:</label>
+            <label htmlFor="name" className="block text-sm font-medium mb-1">
+              Name:
+            </label>
             <input
               type="text"
               id="name"
@@ -98,7 +117,9 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">Email:</label>
+            <label htmlFor="email" className="block text-sm font-medium mb-1">
+              Email:
+            </label>
             <input
               type="email"
               id="email"
@@ -110,7 +131,9 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="aadhaar" className="block text-sm font-medium mb-1">Aadhaar Number (14 digits):</label>
+            <label htmlFor="aadhaar" className="block text-sm font-medium mb-1">
+              Aadhaar Number (14 digits):
+            </label>
             <input
               type="text"
               id="aadhaar"
@@ -124,7 +147,9 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="eid" className="block text-sm font-medium mb-1">EID (12 digits):</label>
+            <label htmlFor="eid" className="block text-sm font-medium mb-1">
+              EID (12 digits):
+            </label>
             <input
               type="text"
               id="eid"
@@ -138,7 +163,12 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="fathers_name" className="block text-sm font-medium mb-1">Father{"'"}s Name:</label>
+            <label
+              htmlFor="fathers_name"
+              className="block text-sm font-medium mb-1"
+            >
+              Father{"'"}s Name:
+            </label>
             <input
               type="text"
               id="fathers_name"
@@ -150,7 +180,9 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium mb-1">Phone Number:</label>
+            <label htmlFor="phone" className="block text-sm font-medium mb-1">
+              Phone Number:
+            </label>
             <input
               type="tel"
               id="phone"
@@ -163,7 +195,9 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-1">Message:</label>
+            <label htmlFor="message" className="block text-sm font-medium mb-1">
+              Message:
+            </label>
             <textarea
               id="message"
               name="message"
@@ -174,14 +208,24 @@ const FormComponent = () => {
               onChange={handleChange}
             ></textarea>
           </div>
-          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">
+          
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded-md"
+          >
             Submit
           </button>
+          <button className="bg-red-500 ml-10 text-white py-2 px-4 rounded-md" onClick={runSeleniumScript} disabled={loading}>
+              {loading ? "Running..." : "Run Bot"}
+            </button>
         </form>
       </div>
 
       <div className="bg-white p-6 rounded-md shadow-md mt-4">
-        <button onClick={clearEvents} className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md">
+        <button
+          onClick={clearEvents}
+          className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md"
+        >
           Clear Events
         </button>
         <h2 className="text-lg font-medium mb-2">Captured Events:</h2>

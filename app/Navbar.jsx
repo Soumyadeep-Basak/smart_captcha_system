@@ -1,7 +1,4 @@
 import React from "react";
-import satyameva from "@/app/assets/satyameva.png";
-import aadhaar from "@/app/assets/adhaar.svg";
-import Image from "next/image";
 import LanguageSelector from "./LanguageSelector";
 
 const Navbar= () => {
@@ -9,11 +6,11 @@ const Navbar= () => {
     <>
       <nav className="bg-white fixed top-0 w-screen z-[300]">
         <div className="flex justify-between mx-auto max-w-[1170px] min-h-[65px] px-4 py-1.5">
-          <Image className="h-12 w-12 " src={satyameva} alt="satyameva" />
+          <img className="h-12 w-12 " src={"https://raw.githubusercontent.com/Community-Programmer/SIH-1672/main/client/src/assets/satyameva.png"} alt="satyameva" />
           <h1 className="flex items-center justify-center text-[#23527c] font-bold text-[24px]">
             Unique Identification Authority of India
           </h1>
-          <Image className="h-12 w-12 " src={aadhaar} alt="aadhaar" />
+          <img className="h-12 w-12 " src={"https://raw.githubusercontent.com/Community-Programmer/SIH-1672/b663f1f371b248ca5f4f68df9bfc19c8ea632eac/client/src/assets/adhaar.svg"} alt="aadhaar" />
         </div>
         <div className="bg-gradient-to-r from-[#000046] to-[#1cb5e0] p-3 relative w-screen">
           <div className="flex items-center h-full mx-auto max-w-[1170px] px-4">

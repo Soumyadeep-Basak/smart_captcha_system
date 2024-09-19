@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./app:/app
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - python-bot  # Wait for Python bot container
+
+  python-bot:
+    build:
+      context: ./python-bot
+      dockerfile: Dockerfile
+    volumes:
+      - ./python-bot:/bot
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - nextjs-app  # Ensure Python bot runs after Next.js app
