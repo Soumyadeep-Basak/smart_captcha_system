@@ -1,5 +1,5 @@
 import React from "react";
-import bg from "@/app/assets/bg.jpg";
+import bg from "./assets/bg.jpg"
 import Link from "next/link";
 import {
   MdOutlineContactPage,

@@ -1,4 +1,5 @@
-"use client"
+'use client';
+
 import React, { useState, useEffect } from 'react';
 
 const FormComponent = () => {
@@ -13,13 +14,8 @@ const FormComponent = () => {
   });
 
   const [events, setEvents] = useState([]);
-
-  // Function to handle form input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
   const [loading, setLoading] = useState(false);
+
 
   const runSeleniumScript = async () => {
     setLoading(true);
@@ -33,26 +29,49 @@ const FormComponent = () => {
       setLoading(false);
     }
   };
+
+  // Function to handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
 
-    // Log all captured events to the console when the form is submitted
+    // Log captured events
     console.log('Captured events:', events);
 
-    // Optionally, capture a 'form_submission' event
+    // Capture a 'form_submission' event
     captureEvent('form_submission', e);
+
+    // Make an API call to send the captured events
+    try {
+      const res = await fetch('/api/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(events),
+      });
+
+      const result = await res.json();
+      console.log('API response:', result);
+    } catch (error) {
+      console.error('Error submitting event data:', error);
+    }
   };
 
   // Function to capture events
   const captureEvent = (eventType, event) => {
     const eventData = {
-      element: event.target.tagName || 'window', // Capturing the element (e.g., button, input, etc.)
+      element: event.target.tagName || 'window',
       eventType,
-      x: event.clientX || 0, // Mouse position X
-      y: event.clientY || 0, // Mouse position Y
-      timestamp: new Date().toISOString(), // Timestamp of the event
+      x: event.clientX || 0,
+      y: event.clientY || 0,
+      timestamp: new Date().toISOString(),
     };
 
     setEvents((prevEvents) => {
@@ -99,7 +118,7 @@ const FormComponent = () => {
         <h2 className="text-lg font-medium mb-2">Fill the Form:</h2>
         <form
           id="event-form"
-          className="space-y-4 max-w-[50%] "
+          className="space-y-4 max-w-[50%]"
           onSubmit={handleSubmit}
         >
           <div>
@@ -138,7 +157,7 @@ const FormComponent = () => {
               type="text"
               id="aadhaar"
               name="aadhaar"
-              maxLength="14"
+              maxLength={14}
               pattern="\d{14}"
               className="w-full border rounded-md p-2"
               required
@@ -154,7 +173,7 @@ const FormComponent = () => {
               type="text"
               id="eid"
               name="eid"
-              maxLength="12"
+              maxLength={12}
               pattern="\d{12}"
               className="w-full border rounded-md p-2"
               required
@@ -163,10 +182,7 @@ const FormComponent = () => {
             />
           </div>
           <div>
-            <label
-              htmlFor="fathers_name"
-              className="block text-sm font-medium mb-1"
-            >
+            <label htmlFor="fathers_name" className="block text-sm font-medium mb-1">
               Father{"'"}s Name:
             </label>
             <input
@@ -202,22 +218,23 @@ const FormComponent = () => {
               id="message"
               name="message"
               className="w-full border rounded-md p-2"
-              rows="4"
+              rows={4}
               required
               value={formData.message}
               onChange={handleChange}
             ></textarea>
           </div>
-          
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
-          >
+
+          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">
             Submit
           </button>
-          <button className="bg-red-500 ml-10 text-white py-2 px-4 rounded-md" onClick={runSeleniumScript} disabled={loading}>
-              {loading ? "Running..." : "Run Bot"}
-            </button>
+          <button
+            className="bg-red-500 ml-10 text-white py-2 px-4 rounded-md"
+            onClick={runSeleniumScript}
+            disabled={loading}
+          >
+            {loading ? 'Running...' : 'Run Bot'}
+          </button>
         </form>
       </div>
 
