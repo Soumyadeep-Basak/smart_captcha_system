@@ -1,5 +1,5 @@
 import React from "react";
-import bg from "@/app/assets/bg.jpg";
+// import bg from "@/app/assets/bg.jpg";
 import Link from "next/link";
 import {
   MdOutlineContactPage,
@@ -35,7 +35,7 @@ const HomePage= () => {
     <>
       <section
         className="bg-cover bg-no-repeat relative w-full mb-[23px] mt-10 ">
-          <Image src={bg} alt="bg" className="w-full h-full object-cover absolute top-0 inset-0 -z-10" />
+          <img src='./assets/bg.jpg' alt="bg" className="w-full h-full object-cover absolute top-0 inset-0 -z-10" />
         <div className="flex flex-col xl:flex-row lg:flex-row md:flex-row pt-28 pb-5 gap-5 h-full justify-between items-center mx-auto max-w-[1170px] px-8 w-full">
           <div className="text-white">
             <p className="xl:text-[5rem] lg:text-[5rem] md:text-[5rem] text-[4rem] mb-[28px] p-0 pt-[8rem] xl:pt-3 lg:pt-3 md:pt-3 text-left leading-none">

@@ -36,7 +36,7 @@ def random_mouse_movement(element, duration=1):
 
 try:
     # Open the form page
-    browser.get('http://127.0.0.1:5500/index.html')  # Replace with your actual local URL
+    browser.get('http://localhost:3000/register')  # Replace with your actual local URL
 
     # Function to safely locate an element and retry if it goes stale
     def get_element(by, value):
@@ -110,12 +110,12 @@ try:
     submit_button.click()
 
     # Wait to ensure the form submission is processed
-    time.sleep(5)
+    # time.sleep(5)
 
     # Move the mouse to the CSV download button and click it
-    download_button = get_element(By.ID, 'download-csv')
-    random_mouse_movement(download_button, duration=0.5)
-    download_button.click()
+    # download_button = get_element(By.ID, 'download-csv')
+    # random_mouse_movement(download_button, duration=0.5)
+    # download_button.click()
 
     # Wait to ensure the CSV file is downloaded
     time.sleep(10)  # Adjust this time if needed
