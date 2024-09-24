@@ -2,7 +2,7 @@ import { exec } from 'child_process';
 import path from 'path';
 
 export async function GET(req) {
-  const scriptPath = path.resolve('scripts', 'form_bot.py');
+  const scriptPath = path.resolve("botv1", "scripts", "form_bot.py");
 
   return new Promise((resolve, reject) => {
     exec(`python ${scriptPath}`, (error, stdout, stderr) => {
