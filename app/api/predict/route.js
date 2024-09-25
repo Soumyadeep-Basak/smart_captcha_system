@@ -20,12 +20,12 @@ export async function POST(req, res) {
       0
     );
 
-    if (totalUniquePositions < 300) {
+    if (totalUniquePositions < 200) {
       console.log("bot activity detected")
-      return NextResponse.json({ status: 'bot' });
+      return NextResponse.json({ status: 'bot', totalUniquePositions });
     } else {
       console.log("user activity detected")
-      return NextResponse.json({ status: 'user' });
+      return NextResponse.json({ status: 'user', totalUniquePositions });
     }
   } catch (error) {
     console.error(error);

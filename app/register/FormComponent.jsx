@@ -9,12 +9,12 @@ const FormComponent = () => {
     aadhaar: '',
     eid: '',
     fathers_name: '',
-    phone: '',
-    message: ''
+    phone: ''
   });
-
+  
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState();
 
 
   const runSeleniumScript = async () => {
@@ -59,18 +59,49 @@ const FormComponent = () => {
 
       const result = await res.json();
       console.log('API response:', result);
+      setResult(result);
     } catch (error) {
       console.error('Error submitting event data:', error);
     }
+
+    
   };
+
+
+  const handleDownload = () => {
+    // const events = JSON.parse(localStorage.getItem('domEvents')) || [];
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "event_name,timestamp,x_position,y_position\n"; // CSV header
+
+    events.forEach(event => {
+      const row = `${event.eventType},${event.timestamp},${event.x},${event.y}\n`;
+      csvContent += row;
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'event_data.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  useEffect(() => {
+    if(result?.status === 'bot'){
+      alert('Bot detected');
+    } else if(result?.status === 'user'){
+      alert('User detected');
+    }
+  }, [result]);
 
   // Function to capture events
   const captureEvent = (eventType, event) => {
     const eventData = {
       element: event.target.tagName || 'window',
       eventType,
-      x: event.clientX || 0,
-      y: event.clientY || 0,
+      x: event.clientX || window.scrollX || 0,
+      y: event.clientY || window.scrollY || 0,
       timestamp: new Date().toISOString(),
     };
 
@@ -101,7 +132,7 @@ const FormComponent = () => {
     eventNames.forEach((eventName) => {
       window.addEventListener(eventName, eventHandler);
     });
-
+    
     // Cleanup event listeners on component unmount
     return () => {
       eventNames.forEach((eventName) => {
@@ -135,37 +166,55 @@ const FormComponent = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full border rounded-md p-2"
-              required
-              value={formData.email}
-              onChange={handleChange}
-            />
+          <div className=' flex items-center gap-4 '>
+            <div className='w-1/2'>
+              <label htmlFor="email" className="block text-sm font-medium mb-1">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full border rounded-md p-2"
+                required
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className='w-1/2'>
+              <label htmlFor="fathers_name" className="block text-sm font-medium mb-1">
+                Father{"'"}s Name:
+              </label>
+              <input
+                type="text"
+                id="fathers_name"
+                name="fathers_name"
+                className="w-full border rounded-md p-2"
+                required
+                value={formData.fathers_name}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="aadhaar" className="block text-sm font-medium mb-1">
-              Aadhaar Number (14 digits):
-            </label>
-            <input
-              type="text"
-              id="aadhaar"
-              name="aadhaar"
-              maxLength={14}
-              pattern="\d{14}"
-              className="w-full border rounded-md p-2"
-              required
-              value={formData.aadhaar}
-              onChange={handleChange}
-            />
+          <div className='flex gap-4 items-center'>
+            <div className='w-1/2'>
+              <label htmlFor="aadhaar" className="block text-sm font-medium mb-1">
+                Aadhaar Number (14 digits):
+              </label>
+              <input
+                type="text"
+                id="aadhaar"
+                name="aadhaar"
+                maxLength={14}
+                pattern="\d{14}"
+                className="w-full border rounded-md p-2"
+                required
+                value={formData.aadhaar}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
           </div>
-          <div>
             <label htmlFor="eid" className="block text-sm font-medium mb-1">
               EID (12 digits):
             </label>
@@ -181,20 +230,7 @@ const FormComponent = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="fathers_name" className="block text-sm font-medium mb-1">
-              Father{"'"}s Name:
-            </label>
-            <input
-              type="text"
-              id="fathers_name"
-              name="fathers_name"
-              className="w-full border rounded-md p-2"
-              required
-              value={formData.fathers_name}
-              onChange={handleChange}
-            />
-          </div>
+          
           <div>
             <label htmlFor="phone" className="block text-sm font-medium mb-1">
               Phone Number:
@@ -210,20 +246,7 @@ const FormComponent = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-1">
-              Message:
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              className="w-full border rounded-md p-2"
-              rows={4}
-              required
-              value={formData.message}
-              onChange={handleChange}
-            ></textarea>
-          </div>
+          
 
           <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">
             Submit
@@ -241,10 +264,14 @@ const FormComponent = () => {
       <div className="bg-white p-6 rounded-md shadow-md mt-4">
         <button
           onClick={clearEvents}
+          id='clear-events'
           className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md"
         >
           Clear Events
         </button>
+
+        <button id="download-csv" onClick={handleDownload} className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md">Download CSV</button>
+
         <h2 className="text-lg font-medium mb-2">Captured Events:</h2>
         <ul className="space-y-2">
           {events.map((event, index) => (
