@@ -14,7 +14,7 @@ const FormComponent = () => {
   
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState([{bot: null, reconstruction_error: 0}]);
 
 
   const runSeleniumScript = async () => {
@@ -40,19 +40,17 @@ const FormComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-
-    // Log captured events
     console.log('Captured events:', events);
-
-    // Capture a 'form_submission' event
     captureEvent('form_submission', e);
+    // alert('Form submitted successfully!');
 
     // Make an API call to send the captured events
     try {
-      const res = await fetch('/api/predict', {
+      const res = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify(events),
       });
@@ -88,21 +86,21 @@ const FormComponent = () => {
   };
 
   useEffect(() => {
-    if(result?.status === 'bot'){
+    if(result[0].bot){
       alert('Bot detected');
-    } else if(result?.status === 'user'){
+    } else if(result[0].bot===false && result[0].bot!==null){
       alert('User detected');
     }
   }, [result]);
 
   // Function to capture events
-  const captureEvent = (eventType, event) => {
+  const captureEvent = (event_name, event) => {
     const eventData = {
-      element: event.target.tagName || 'window',
-      eventType,
-      x: event.clientX || window.scrollX || 0,
-      y: event.clientY || window.scrollY || 0,
-      timestamp: new Date().toISOString(),
+      // element: event.target.tagName || 'window',
+      event_name,
+      x_position: event.clientX || window.scrollX || 0,
+      y_position: event.clientY || window.scrollY || 0,
+      timestamp: new Date().getTime(),
     };
 
     setEvents((prevEvents) => {
@@ -248,16 +246,16 @@ const FormComponent = () => {
           </div>
           
 
-          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">
+          <button type="submit" id='submit' className="bg-blue-500 text-white py-2 px-4 rounded-md">
             Submit
           </button>
-          <button
+          {/* <button
             className="bg-red-500 ml-10 text-white py-2 px-4 rounded-md"
             onClick={runSeleniumScript}
             disabled={loading}
           >
             {loading ? 'Running...' : 'Run Bot'}
-          </button>
+          </button> */}
         </form>
       </div>
 

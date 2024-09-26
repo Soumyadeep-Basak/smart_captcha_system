@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 import joblib
 import pandas as pd
 import numpy as np
@@ -6,6 +8,7 @@ from tensorflow.keras.models import load_model
 from keras.losses import MeanSquaredError
 
 app = Flask(__name__)
+CORS(app)
 
 
 autoencoder = load_model('autoencoder_model.h5',custom_objects={'mse': MeanSquaredError()})
