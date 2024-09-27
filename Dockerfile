@@ -1,20 +1,25 @@
 # Dockerfile for Next.js app
 
-# Step 1: Build stage
-FROM node:18 AS builder
-WORKDIR /app
+# Use an official Node.js image as the base image
+FROM node:18-alpine
 
-COPY ./app/package.json ./app/package-lock.json ./
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-COPY ./app ./
+# Copy the rest of the application to the container
+COPY . .
+
+# Build the Next.js app
 RUN npm run build
 
-# Step 2: Production stage
-FROM node:18-alpine AS production
-WORKDIR /app
-
-COPY --from=builder /app ./
+# Expose port 3000 for the Next.js app
 EXPOSE 3000
 
+# Start the Next.js app
 CMD ["npm", "run", "start"]

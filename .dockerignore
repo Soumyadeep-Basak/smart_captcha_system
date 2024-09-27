@@ -1,4 +1,8 @@
 node_modules
-npm-debug.log
-Dockerfile
-docker-compose.yml
+.next
+build
+.git
+*.log
+.DS_Store
+.env
+coverage
