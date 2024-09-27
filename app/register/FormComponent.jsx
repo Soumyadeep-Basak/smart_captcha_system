@@ -1,8 +1,10 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserInformation } from '../slice/userSlice';
 
 const FormComponent = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,11 +13,14 @@ const FormComponent = () => {
     fathers_name: '',
     phone: ''
   });
-  
+  const users = useSelector((state) => state.user.information);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState([{bot: null, reconstruction_error: 0}]);
+  const [mousemoveCount, setMousemoveCount] = useState(0);
+  const [keypressCount, setKeypressCount] = useState(0);
 
+  
 
   const runSeleniumScript = async () => {
     setLoading(true);
@@ -45,6 +50,12 @@ const FormComponent = () => {
     // alert('Form submitted successfully!');
 
     // Make an API call to send the captured events
+    const payload = {
+      mouseMoveCount: mousemoveCount, 
+      keyPressCount: keypressCount, 
+      events: events 
+    };
+
     try {
       const res = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
@@ -52,11 +63,27 @@ const FormComponent = () => {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        body: JSON.stringify(events),
+        body: JSON.stringify(payload),
       });
 
       const result = await res.json();
       console.log('API response:', result);
+      const { ip_address, user_agent, current_timestamp, prediction } = result;
+
+      const newUser={
+        ipAddress: ip_address,
+        userAgent: user_agent,
+        timestamp: current_timestamp,
+        mouseMoveCount: mousemoveCount,
+        keyPressCount: keypressCount,
+        isBot:prediction[0].bot,
+      }
+      
+      dispatch(addUserInformation(newUser));
+      const savedUsers = JSON.parse(localStorage.getItem('users')) || [];
+      savedUsers.push(newUser);
+      localStorage.setItem('users', JSON.stringify(savedUsers));
+      console.log("user ",newUser);
       setResult(result);
     } catch (error) {
       console.error('Error submitting event data:', error);
@@ -86,13 +113,17 @@ const FormComponent = () => {
   };
 
   useEffect(() => {
-    if(result[0].bot){
-      alert('Bot detected');
-    } else if(result[0].bot===false && result[0].bot!==null){
-      alert('User detected');
+    if (result && result.prediction && result.prediction.length > 0) {
+      if (result.prediction[0].bot) {
+        alert('Bot detected');
+      } else if (result.prediction[0].bot === false) {
+        alert('User detected');
+      }
+    } else {
+      console.warn('No predictions available'); // Optional: handle cases when there are no predictions
     }
   }, [result]);
-
+  
   // Function to capture events
   const captureEvent = (event_name, event) => {
     const eventData = {
@@ -102,6 +133,12 @@ const FormComponent = () => {
       y_position: event.clientY || window.scrollY || 0,
       timestamp: new Date().getTime(),
     };
+
+    if ((event_name === 'mousemove') || (event_name === 'mouseup') || (event_name === 'mouseover') || (event_name === 'mousedown') || (event_name === 'mouseout')) {
+      setMousemoveCount((prevCount) => prevCount + 1);
+    } else if ((event_name === 'keypress') || (event_name === 'keydown')  || (event_name === 'keyup') ) {
+      setKeypressCount((prevCount) => prevCount + 1);
+    }
 
     setEvents((prevEvents) => {
       const newEvents = [...prevEvents, eventData];
