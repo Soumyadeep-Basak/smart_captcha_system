@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./Navbar";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import  ReduxProvider from './provider';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +31,13 @@ export default function RootLayout({ children }) {
         {children}
         <ToastContainer />
       </body>
+      <clasxProvider>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <Navbar />
+          {children}
+        </body>
+      </clasxProvider>
     </html>
   );
 }
+

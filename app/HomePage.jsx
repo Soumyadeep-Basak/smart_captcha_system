@@ -8,6 +8,7 @@ import {
 } from "react-icons/md";
 import Image from "next/image";
 
+
 const HomePage= () => {
   const styles = {
     languageOption: {
