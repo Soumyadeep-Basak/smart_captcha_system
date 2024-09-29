@@ -72,13 +72,13 @@ const HomePage= () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center text-white font-bold mt-[-49px] text-center w-screen z-999 xl:flex-row lg:flex-row md:flex-col flex-col xl:text-white lg:text-white pt-14 text-black">
+        {/* <div className="flex items-center justify-center text-white font-bold mt-[-49px] text-center w-screen z-999 xl:flex-row lg:flex-row md:flex-col flex-col xl:text-white lg:text-white pt-14 text-black">
           {languages.map((language) => (
             <div key={language} style={styles.languageOption}>
               {language}
             </div>
           ))}
-        </div>
+        </div> */}
       </section>
 
       <section className="bg-white shadow-[0_8px_6px_-6px_rgba(50,50,93,0.25)] mb-7 pb-1 pt-0">
@@ -119,18 +119,7 @@ const HomePage= () => {
           </span>
         </div>
       </section>
-      <p className="text-center text-base font-bold px-4 pb-4">
-        Services which require mobile number to be registered with Aadhaar
-      </p>
-      <p className="text-center px-4 pb-4">
-        Please Visit Official UIDAI website:{" "}
-        <Link
-          className="text-blue-600"
-          href="https://myaadhaar.uidai.gov.in/en_IN"
-        >
-          https://myaadhaar.uidai.gov.in/en_IN
-        </Link>
-      </p>
+      
     </>
   );
 };

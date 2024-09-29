@@ -28,10 +28,10 @@ export default function LanguageSelector() {
       <select
         value={selectedLanguage}
         onChange={handleLanguageChange}
-        className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        className="block appearance-none w-full bg-transparent border-0 text-white px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
       >
         {languages.map((language) => (
-          <option key={language} value={language}>
+          <option className='text-black' key={language} value={language}>
             {language}
           </option>
         ))}

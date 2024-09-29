@@ -4,10 +4,16 @@ import React, { useState, useEffect } from 'react';
 import { Bounce, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserInformation } from '../slice/userSlice';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Loader2 } from "lucide-react"
 
 const FormComponent = () => {
   const router = useRouter();
-
+  const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
@@ -24,21 +30,6 @@ const FormComponent = () => {
   const [mousemoveCount, setMousemoveCount] = useState(0);
   const [keypressCount, setKeypressCount] = useState(0);
 
-  
-
-  const runSeleniumScript = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch('/api/bot', { method: 'GET' });
-      const data = await res.text();
-      console.log('Selenium response:', data);
-    } catch (error) {
-      console.error('Error running Selenium script:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // Function to handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,45 +42,7 @@ const FormComponent = () => {
     console.log('Form submitted:', formData);
     console.log('Captured events:', events);
     captureEvent('form_submission', e);
-    
-    /*
-    const payload = {
-      mouseMoveCount: mousemoveCount, 
-      keyPressCount: keypressCount, 
-      events: events 
-    };
-
-      try {
-        const res = await fetch('http://127.0.0.1:5000/predict', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify(payload),
-        });
-
-        const result = await res.json();
-        console.log('API response:', result);
-        setResult(result);
-      } catch (error) {
-        console.error('Error submitting event data:', error);
-      }
-    */
-    if(result[0].bot===false){
-      toast.success('Form Submitted Successfully', {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    } else if(result[0].bot===true){
-      router.push('/verify');
+    setIsOpen(true);
     // Make an API call to send the captured events
     const payload = {
       mouseMoveCount: mousemoveCount, 
@@ -128,8 +81,23 @@ const FormComponent = () => {
       setResult(result);
     } catch (error) {
       console.error('Error submitting event data:', error);
+    } finally {
+      setIsOpen(false);
     }
-    
+    if(result[0].bot===false){
+      toast.success('Form Submitted Successfully', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else if(result[0].bot===true){
+      router.push('/verify');
   };
 }
 
@@ -153,18 +121,6 @@ const FormComponent = () => {
     document.body.removeChild(link);
   };
 
-  
-  useEffect(() => {
-    if (result && result.prediction && result.prediction.length > 0) {
-      if (result.prediction[0].bot) {
-        alert('Bot detected');
-      } else if (result.prediction[0].bot === false) {
-        alert('User detected');
-      }
-    } else {
-      console.warn('No predictions available'); // Optional: handle cases when there are no predictions
-    }
-  }, [result]);
   
   // Function to capture events
   const captureEvent = (event_name, event) => {
@@ -220,6 +176,16 @@ const FormComponent = () => {
 
   return (
     <div className="p-8 w-full mt-24 bg-gray-100 min-h-screen grid grid-cols-2 gap-8 ">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[350px]">
+        <div className="flex items-center justify-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <p className="text-lg font-semibold text-center">Verifying Identity</p>
+        </div>
+      </DialogContent>
+    </Dialog>
       <div className='w-full h-full flex flex-col justify-start items-start gap-4'>
         <h1 className="text-2xl font-bold mb-4">Form with Event Data Capture</h1>
         <div className="bg-white p-6 rounded-md shadow-md w-full">
