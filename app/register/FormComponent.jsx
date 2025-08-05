@@ -79,13 +79,29 @@ const FormComponent = () => {
       localStorage.setItem('users', JSON.stringify(savedUsers));
       console.log("user ",newUser);
       setResult(result);
+
+      // CORRECTED LOGIC: bot=true should redirect to captcha, bot=false should show success
+      if(prediction[0].bot === true){
+        // Bot detected (reconstruction error < 300) - redirect to captcha
+        router.push('/verify');
+      } else if(prediction[0].bot === false){
+        // Human detected (reconstruction error >= 300) - show success
+        toast.success('Form Submitted Successfully', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     } catch (error) {
       console.error('Error submitting event data:', error);
-    } finally {
-      setIsOpen(false);
-    }
-    if(result[0].bot===false){
-      toast.success('Form Submitted Successfully', {
+      // Show error toast when API call fails
+      toast.error('Failed to submit form. Please try again.', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -96,10 +112,10 @@ const FormComponent = () => {
         theme: "light",
         transition: Bounce,
       });
-    } else if(result[0].bot===true){
-      router.push('/verify');
+    } finally {
+      setIsOpen(false);
+    }
   };
-}
 
 
   const handleDownload = () => {

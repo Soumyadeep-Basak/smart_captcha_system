@@ -12,7 +12,10 @@ app = Flask(__name__)
 CORS(app)
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")  # Replace with your connection string if using MongoDB Atlas
+# Option 1: Local MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+# Option 2: MongoDB Atlas (Cloud) - uncomment and add your connection string
+# client = MongoClient("mongodb+srv://username:password@cluster.mongodb.net/")
 db = client['prediction_db']  # Your database name
 collection = db['predictions']  # Your collection name
 
