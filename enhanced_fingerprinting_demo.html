@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Browser Fingerprinting Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .feature-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            background-color: #f8f9fa;
+        }
+        .high-priority { border-left-color: #dc3545; }
+        .medium-priority { border-left-color: #ffc107; }
+        .low-priority { border-left-color: #28a745; }
+        .feature-value {
+            font-weight: bold;
+            color: #333;
+        }
+        .risk-indicator {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            display: inline-block;
+            margin: 2px;
+        }
+        .risk-high { background-color: #dc3545; }
+        .risk-medium { background-color: #ffc107; color: #333; }
+        .risk-low { background-color: #28a745; }
+        .collect-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .collect-btn:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .json-display {
+            background-color: #343a40;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Enhanced Browser Fingerprinting Demo</h1>
+        <p>This demo shows the advanced browser features that can be collected to detect bots and automated tools.</p>
+        
+        <button class="collect-btn" onclick="collectAndAnalyzeFingerprint()">
+            🚀 Collect Browser Fingerprint
+        </button>
+        
+        <div id="results" class="results" style="display: none;">
+            <h2>📊 Fingerprint Analysis Results</h2>
+            <div id="risk-summary"></div>
+            <div id="feature-details"></div>
+            <h3>🔬 Raw Fingerprint Data</h3>
+            <div id="json-output" class="json-display"></div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Browser Fingerprinting - Same as our utility
+        function collectBrowserFingerprint() {
+            const fingerprint = {};
+
+            try {
+                // 🔥 Very High Priority Features
+                fingerprint.webdriver_detected = navigator.webdriver || false;
+                fingerprint.plugins_count = navigator.plugins ? navigator.plugins.length : 0;
+                fingerprint.plugins_list = navigator.plugins ? 
+                    Array.from(navigator.plugins).map(plugin => plugin.name).slice(0, 5) : [];
+                fingerprint.mime_types_count = navigator.mimeTypes ? navigator.mimeTypes.length : 0;
+
+                // ✅ High Priority Features
+                fingerprint.user_agent = navigator.userAgent || '';
+                fingerprint.user_agent_length = fingerprint.user_agent.length;
+                
+                const suspiciousPatterns = [
+                    'headless', 'phantom', 'selenium', 'webdriver', 'puppeteer', 
+                    'chrome-headless', 'chromeless', 'bot', 'crawler', 'spider'
+                ];
+                fingerprint.suspicious_ua_patterns = suspiciousPatterns.filter(pattern => 
+                    fingerprint.user_agent.toLowerCase().includes(pattern)
+                );
+
+                // ⚠️ Medium Priority Features
+                fingerprint.screen_width = screen.width || 0;
+                fingerprint.screen_height = screen.height || 0;
+                fingerprint.screen_color_depth = screen.colorDepth || 0;
+                fingerprint.screen_pixel_depth = screen.pixelDepth || 0;
+                
+                fingerprint.suspicious_screen = (
+                    fingerprint.screen_width === 0 || 
+                    fingerprint.screen_height === 0 ||
+                    fingerprint.screen_width === fingerprint.screen_height ||
+                    (fingerprint.screen_width < 800 && fingerprint.screen_height < 600)
+                );
+
+                // ⚠️ Low Priority Features
+                fingerprint.max_touch_points = navigator.maxTouchPoints || 0;
+                fingerprint.touch_support = 'ontouchstart' in window;
+
+                // Additional Advanced Features
+                fingerprint.language = navigator.language || '';
+                fingerprint.languages = navigator.languages ? navigator.languages.slice(0, 3) : [];
+                fingerprint.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+                fingerprint.hardware_concurrency = navigator.hardwareConcurrency || 0;
+                fingerprint.platform = navigator.platform || '';
+                fingerprint.os_cpu = navigator.oscpu || '';
+                fingerprint.cookie_enabled = navigator.cookieEnabled || false;
+                fingerprint.do_not_track = navigator.doNotTrack || '';
+                
+                fingerprint.window_outer_width = window.outerWidth || 0;
+                fingerprint.window_outer_height = window.outerHeight || 0;
+                fingerprint.window_inner_width = window.innerWidth || 0;
+                fingerprint.window_inner_height = window.innerHeight || 0;
+                
+                fingerprint.device_memory = navigator.deviceMemory || 0;
+                
+                if (navigator.connection) {
+                    fingerprint.connection_type = navigator.connection.effectiveType || '';
+                    fingerprint.connection_downlink = navigator.connection.downlink || 0;
+                }
+                
+                fingerprint.permissions_supported = 'permissions' in navigator;
+                
+                // WebGL fingerprinting
+                try {
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                    if (gl) {
+                        fingerprint.webgl_vendor = gl.getParameter(gl.VENDOR) || '';
+                        fingerprint.webgl_renderer = gl.getParameter(gl.RENDERER) || '';
+                        fingerprint.webgl_supported = true;
+                    } else {
+                        fingerprint.webgl_supported = false;
+                    }
+                } catch (e) {
+                    fingerprint.webgl_supported = false;
+                }
+                
+                // Canvas fingerprinting
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    ctx.textBaseline = 'top';
+                    ctx.font = '14px Arial';
+                    ctx.fillText('Browser fingerprint test 🤖', 2, 2);
+                    fingerprint.canvas_fingerprint = canvas.toDataURL().slice(-50);
+                    fingerprint.canvas_supported = true;
+                } catch (e) {
+                    fingerprint.canvas_supported = false;
+                }
+                
+                fingerprint.performance_supported = 'performance' in window;
+                fingerprint.local_storage_supported = 'localStorage' in window;
+                fingerprint.session_storage_supported = 'sessionStorage' in window;
+                fingerprint.indexed_db_supported = 'indexedDB' in window;
+                
+                // Audio context
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    fingerprint.audio_context_supported = true;
+                    fingerprint.audio_sample_rate = audioContext.sampleRate || 0;
+                    audioContext.close();
+                } catch (e) {
+                    fingerprint.audio_context_supported = false;
+                }
+                
+                fingerprint.battery_supported = 'getBattery' in navigator;
+                fingerprint.gamepad_supported = 'getGamepads' in navigator;
+                fingerprint.media_devices_supported = 'mediaDevices' in navigator;
+                fingerprint.notification_permission = 'Notification' in window ? Notification.permission : 'unsupported';
+                fingerprint.clipboard_supported = 'clipboard' in navigator;
+                
+                fingerprint.fingerprint_timestamp = Date.now();
+                
+                return fingerprint;
+                
+            } catch (error) {
+                console.error('Error collecting browser fingerprint:', error);
+                return {
+                    error: error.message,
+                    webdriver_detected: false,
+                    plugins_count: 0,
+                    mime_types_count: 0,
+                    user_agent: '',
+                    screen_width: 0,
+                    screen_height: 0,
+                    max_touch_points: 0,
+                    fingerprint_timestamp: Date.now()
+                };
+            }
+        }
+
+        function calculateFingerprintRisk(fingerprint) {
+            let riskScore = 0;
+            const riskFactors = [];
+            
+            // 🔥 Very High Risk Indicators
+            if (fingerprint.webdriver_detected) {
+                riskScore += 0.9;
+                riskFactors.push('webdriver_detected');
+            }
+            
+            if (fingerprint.plugins_count === 0) {
+                riskScore += 0.8;
+                riskFactors.push('no_plugins');
+            }
+            
+            if (fingerprint.mime_types_count === 0) {
+                riskScore += 0.7;
+                riskFactors.push('no_mime_types');
+            }
+            
+            // ✅ High Risk Indicators
+            if (fingerprint.suspicious_ua_patterns && fingerprint.suspicious_ua_patterns.length > 0) {
+                riskScore += 0.8;
+                riskFactors.push('suspicious_user_agent');
+            }
+            
+            if (fingerprint.user_agent_length < 50) {
+                riskScore += 0.6;
+                riskFactors.push('short_user_agent');
+            }
+            
+            // ⚠️ Medium Risk Indicators
+            if (fingerprint.suspicious_screen) {
+                riskScore += 0.5;
+                riskFactors.push('suspicious_screen_size');
+            }
+            
+            if (!fingerprint.webgl_supported) {
+                riskScore += 0.4;
+                riskFactors.push('no_webgl');
+            }
+            
+            if (!fingerprint.canvas_supported) {
+                riskScore += 0.4;
+                riskFactors.push('no_canvas');
+            }
+            
+            if (fingerprint.hardware_concurrency === 0) {
+                riskScore += 0.3;
+                riskFactors.push('no_hardware_info');
+            }
+            
+            if (fingerprint.languages.length === 0) {
+                riskScore += 0.2;
+                riskFactors.push('no_languages');
+            }
+            
+            return {
+                riskScore: Math.min(riskScore, 1.0),
+                riskFactors,
+                riskLevel: riskScore >= 0.8 ? 'HIGH' : (riskScore >= 0.5 ? 'MEDIUM' : 'LOW'),
+                isBot: riskScore >= 0.6
+            };
+        }
+
+        function collectAndAnalyzeFingerprint() {
+            console.log('🔍 Collecting browser fingerprint...');
+            
+            const fingerprint = collectBrowserFingerprint();
+            const riskAssessment = calculateFingerprintRisk(fingerprint);
+            
+            console.log('🔍 Fingerprint collected:', fingerprint);
+            console.log('🚨 Risk assessment:', riskAssessment);
+            
+            displayResults(fingerprint, riskAssessment);
+        }
+
+        function displayResults(fingerprint, riskAssessment) {
+            const resultsDiv = document.getElementById('results');
+            const riskSummaryDiv = document.getElementById('risk-summary');
+            const featureDetailsDiv = document.getElementById('feature-details');
+            const jsonOutputDiv = document.getElementById('json-output');
+            
+            // Risk Summary
+            const riskClass = riskAssessment.riskLevel === 'HIGH' ? 'risk-high' : 
+                             (riskAssessment.riskLevel === 'MEDIUM' ? 'risk-medium' : 'risk-low');
+            
+            riskSummaryDiv.innerHTML = `
+                <h3>🚨 Risk Assessment</h3>
+                <div class="risk-indicator ${riskClass}">
+                    Risk Level: ${riskAssessment.riskLevel} (${(riskAssessment.riskScore * 100).toFixed(1)}%)
+                </div>
+                <div class="risk-indicator ${riskAssessment.isBot ? 'risk-high' : 'risk-low'}">
+                    Bot Detection: ${riskAssessment.isBot ? '🤖 BOT DETECTED' : '👤 HUMAN LIKELY'}
+                </div>
+                <p><strong>Risk Factors (${riskAssessment.riskFactors.length}):</strong> ${riskAssessment.riskFactors.join(', ') || 'None detected'}</p>
+            `;
+            
+            // Feature Details
+            featureDetailsDiv.innerHTML = `
+                <h3>🔍 Feature Analysis</h3>
+                
+                <div class="feature-section high-priority">
+                    <h4>🔥 Very High Priority Features</h4>
+                    <p><strong>WebDriver Detected:</strong> <span class="feature-value">${fingerprint.webdriver_detected ? '❌ YES (Bot indicator!)' : '✅ NO'}</span></p>
+                    <p><strong>Plugins Count:</strong> <span class="feature-value">${fingerprint.plugins_count} ${fingerprint.plugins_count === 0 ? '❌ (Suspicious)' : '✅'}</span></p>
+                    <p><strong>MIME Types Count:</strong> <span class="feature-value">${fingerprint.mime_types_count} ${fingerprint.mime_types_count === 0 ? '❌ (Suspicious)' : '✅'}</span></p>
+                </div>
+                
+                <div class="feature-section medium-priority">
+                    <h4>✅ High Priority Features</h4>
+                    <p><strong>User Agent Length:</strong> <span class="feature-value">${fingerprint.user_agent_length} chars ${fingerprint.user_agent_length < 50 ? '❌ (Too short)' : '✅'}</span></p>
+                    <p><strong>Suspicious UA Patterns:</strong> <span class="feature-value">${fingerprint.suspicious_ua_patterns.length > 0 ? '❌ ' + fingerprint.suspicious_ua_patterns.join(', ') : '✅ None'}</span></p>
+                </div>
+                
+                <div class="feature-section low-priority">
+                    <h4>⚠️ Medium Priority Features</h4>
+                    <p><strong>Screen Resolution:</strong> <span class="feature-value">${fingerprint.screen_width}x${fingerprint.screen_height} ${fingerprint.suspicious_screen ? '❌ (Suspicious)' : '✅'}</span></p>
+                    <p><strong>Touch Points:</strong> <span class="feature-value">${fingerprint.max_touch_points}</span></p>
+                    <p><strong>WebGL Support:</strong> <span class="feature-value">${fingerprint.webgl_supported ? '✅ YES' : '❌ NO'}</span></p>
+                    <p><strong>Canvas Support:</strong> <span class="feature-value">${fingerprint.canvas_supported ? '✅ YES' : '❌ NO'}</span></p>
+                    <p><strong>Audio Context:</strong> <span class="feature-value">${fingerprint.audio_context_supported ? '✅ YES' : '❌ NO'}</span></p>
+                    <p><strong>Hardware Concurrency:</strong> <span class="feature-value">${fingerprint.hardware_concurrency} cores ${fingerprint.hardware_concurrency === 0 ? '❌ (Missing)' : '✅'}</span></p>
+                </div>
+            `;
+            
+            // JSON Output
+            jsonOutputDiv.textContent = JSON.stringify({
+                fingerprint: fingerprint,
+                risk_assessment: riskAssessment
+            }, null, 2);
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        // Auto-collect on page load for demo
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                console.log('🚀 Auto-collecting fingerprint for demo...');
+                collectAndAnalyzeFingerprint();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

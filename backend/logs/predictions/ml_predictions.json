@@ -1,0 +1,59 @@
+[
+  {
+    "service": "ml_model",
+    "timestamp": "2025-08-05T14:07:01.091375Z",
+    "prediction": {
+      "bot": false,
+      "reconstruction_error": 0.49211250595802514,
+      "confidence": 0.015774988083949726,
+      "raw_error": 761.8312410629624
+    },
+    "input_summary": {
+      "mouseMoveCount": 330,
+      "keyPressCount": 143,
+      "events_count": 480
+    },
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "python-requests/2.32.4"
+    }
+  },
+  {
+    "service": "ml_model",
+    "timestamp": "2025-08-05T14:14:02.298066Z",
+    "prediction": {
+      "bot": true,
+      "reconstruction_error": 0.9718580462078196,
+      "confidence": 0.9437160924156391,
+      "raw_error": 42.21293068827061
+    },
+    "input_summary": {
+      "mouseMoveCount": 15,
+      "keyPressCount": 8,
+      "events_count": 5
+    },
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "python-requests/2.32.4"
+    }
+  },
+  {
+    "service": "ml_model",
+    "timestamp": "2025-08-05T14:16:19.769694Z",
+    "prediction": {
+      "bot": false,
+      "reconstruction_error": 0.17170925864315711,
+      "confidence": 0.6565814827136858,
+      "raw_error": 1242.4361120352644
+    },
+    "input_summary": {
+      "mouseMoveCount": 600,
+      "keyPressCount": 161,
+      "events_count": 772
+    },
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "python-requests/2.32.4"
+    }
+  }
+]

@@ -1,0 +1,211 @@
+[
+  {
+    "service": "honeypot",
+    "timestamp": "2025-08-05T14:07:03.267659Z",
+    "analysis": {
+      "is_suspicious": true,
+      "threat_level": "medium",
+      "honeypot_score": 0.375,
+      "threat_indicators": [
+        "superhuman_speed",
+        "inhuman_reaction_time",
+        "repetitive_intervals"
+      ],
+      "detailed_analysis": {
+        "speed": {
+          "suspicious": true,
+          "indicators": [
+            "superhuman_speed"
+          ],
+          "metrics": {
+            "avg_speed": 254.2527313613598,
+            "max_speed": 5344.532334910721,
+            "speed_variance": 267875.38338807557
+          }
+        },
+        "timing": {
+          "suspicious": true,
+          "indicators": [
+            "inhuman_reaction_time",
+            "repetitive_intervals"
+          ],
+          "metrics": {
+            "avg_interval": 63.183716075156575,
+            "interval_variance": 28892.020528153207,
+            "fast_interactions": 384
+          }
+        },
+        "movement": {
+          "suspicious": false,
+          "indicators": [],
+          "metrics": {
+            "straight_line_ratio": 0.7196652719665272,
+            "teleportation_events": 0
+          }
+        },
+        "honeypot_triggers": {
+          "triggered": false,
+          "triggers": [],
+          "metrics": {
+            "invisible_interactions": 0,
+            "form_fills": 0,
+            "focus_events": 0
+          }
+        }
+      },
+      "confidence": 0.5625
+    },
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "events_analyzed": 480
+    },
+    "honeypot_verdict": {
+      "is_bot": true,
+      "threat_level": "medium",
+      "confidence": 0.5625,
+      "recommended_action": "monitor"
+    }
+  },
+  {
+    "service": "honeypot",
+    "timestamp": "2025-08-05T14:14:04.433523Z",
+    "analysis": {
+      "is_suspicious": false,
+      "threat_level": "medium",
+      "honeypot_score": 0.4,
+      "threat_indicators": [
+        "uniform_speed",
+        "robotic_timing",
+        "repetitive_intervals",
+        "too_many_straight_lines"
+      ],
+      "detailed_analysis": {
+        "speed": {
+          "suspicious": true,
+          "indicators": [
+            "uniform_speed"
+          ],
+          "metrics": {
+            "avg_speed": 141.4213562373095,
+            "max_speed": 141.4213562373095,
+            "speed_variance": 0.0
+          }
+        },
+        "timing": {
+          "suspicious": true,
+          "indicators": [
+            "robotic_timing",
+            "repetitive_intervals"
+          ],
+          "metrics": {
+            "avg_interval": 100.0,
+            "interval_variance": 0.0,
+            "fast_interactions": 0
+          }
+        },
+        "movement": {
+          "suspicious": true,
+          "indicators": [
+            "too_many_straight_lines"
+          ],
+          "metrics": {
+            "straight_line_ratio": 1.0,
+            "teleportation_events": 0
+          }
+        },
+        "honeypot_triggers": {
+          "triggered": false,
+          "triggers": [],
+          "metrics": {
+            "invisible_interactions": 0,
+            "form_fills": 0,
+            "focus_events": 0
+          }
+        }
+      },
+      "confidence": 0.6000000000000001
+    },
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "python-requests/2.32.3",
+      "events_analyzed": 5
+    },
+    "honeypot_verdict": {
+      "is_bot": false,
+      "threat_level": "medium",
+      "confidence": 0.6000000000000001,
+      "recommended_action": "monitor"
+    }
+  },
+  {
+    "service": "honeypot",
+    "timestamp": "2025-08-05T14:16:21.871278Z",
+    "analysis": {
+      "is_suspicious": false,
+      "threat_level": "medium",
+      "honeypot_score": 0.4,
+      "threat_indicators": [
+        "superhuman_speed",
+        "suspicious_avg_speed",
+        "inhuman_reaction_time",
+        "repetitive_intervals"
+      ],
+      "detailed_analysis": {
+        "speed": {
+          "suspicious": true,
+          "indicators": [
+            "superhuman_speed",
+            "suspicious_avg_speed"
+          ],
+          "metrics": {
+            "avg_speed": 597.40566908706,
+            "max_speed": 61903.311704625296,
+            "speed_variance": 7572401.117552375
+          }
+        },
+        "timing": {
+          "suspicious": true,
+          "indicators": [
+            "inhuman_reaction_time",
+            "repetitive_intervals"
+          ],
+          "metrics": {
+            "avg_interval": 767.7898832684825,
+            "interval_variance": 351011922.37867844,
+            "fast_interactions": 646
+          }
+        },
+        "movement": {
+          "suspicious": false,
+          "indicators": [],
+          "metrics": {
+            "straight_line_ratio": 0.7194805194805195,
+            "teleportation_events": 4
+          }
+        },
+        "honeypot_triggers": {
+          "triggered": false,
+          "triggers": [],
+          "metrics": {
+            "invisible_interactions": 0,
+            "form_fills": 0,
+            "focus_events": 0
+          }
+        }
+      },
+      "confidence": 0.6000000000000001
+    },
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "events_analyzed": 772
+    },
+    "honeypot_verdict": {
+      "is_bot": false,
+      "threat_level": "medium",
+      "confidence": 0.6000000000000001,
+      "recommended_action": "monitor"
+    }
+  }
+]

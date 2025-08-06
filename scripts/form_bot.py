@@ -61,6 +61,16 @@ try:
     fathers_name_input = get_element(By.ID, 'fathers_name')
     phone_input = get_element(By.ID, 'phone')
     submit_button = get_element(By.XPATH, '//button[@type="submit"]')
+    
+    # HONEYPOT TRIGGER: Simple bot should trigger the hidden CSS field
+    # This simulates a basic bot that fills all visible fields including hidden ones
+    print("🍯 Simple bot triggering honeypot: Hidden CSS field")
+    try:
+        hidden_field = get_element(By.ID, 'website_url')
+        hidden_field.send_keys('http://bot-detected.com')
+        print("✅ Hidden honeypot field filled successfully")
+    except Exception as e:
+        print(f"⚠️ Could not trigger hidden honeypot: {e}")
 
     # Fill in the form fields
     random_mouse_movement(name_input)
