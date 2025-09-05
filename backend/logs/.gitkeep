@@ -1,0 +1,3 @@
+# This file ensures the logs directory is tracked by git
+# Even when it's empty, maintaining the directory structure
+# for the Smart Captcha System

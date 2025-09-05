@@ -1,8 +1,158 @@
-node_modules
-.next
-build
-.git
-*.log
-.DS_Store
+# 🛡️ Smart Captcha System - Docker Ignore
+# Optimize Docker builds by excluding unnecessary files
+
+# ===========================
+# 🐍 Python
+# ===========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# ===========================
+# 📱 Node.js / React
+# ===========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+.nuxt/
+dist/
+build/
+coverage/
+.nyc_output
+*.tgz
+.yarn-integrity
+.eslintcache
+
+# ===========================
+# 🔐 Environment & Secrets
+# ===========================
 .env
-coverage
+.env.*
+!.env.example
+*.pem
+*.key
+config/secrets.json
+secrets/
+credentials/
+
+# ===========================
+# 🗂️ Version Control
+# ===========================
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# ===========================
+# 📊 Logs & Data
+# ===========================
+*.log
+logs/
+log/
+data/
+datasets/
+*.db
+*.sqlite*
+
+# ===========================
+# 🤖 ML & AI Models
+# ===========================
+*.h5
+*.pkl
+*.model
+models/trained/
+models/checkpoints/
+saved_model/
+
+# ===========================
+# 🧪 Testing & Development
+# ===========================
+test/
+tests/
+.pytest_cache/
+coverage/
+.coverage
+*.xml
+junit.xml
+
+# ===========================
+# 💻 IDE & Editor
+# ===========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===========================
+# 🐳 Docker
+# ===========================
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+.docker/
+
+# ===========================
+# 📁 Project Specific
+# ===========================
+# Documentation (not needed in container)
+*.md
+!README.md
+docs/
+documentation/
+
+# Scripts (development only)
+scripts/test_*
+scripts/debug_*
+
+# Analysis notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+
+# Cache
+.cache/
+cache/
+
+# Monitoring data
+prometheus/
+grafana/
+
+# Deployment configs
+kubernetes/
+terraform/
+.aws/

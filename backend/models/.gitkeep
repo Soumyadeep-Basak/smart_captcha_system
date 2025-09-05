@@ -1,0 +1,3 @@
+# This file ensures the models directory is tracked by git
+# Maintaining directory structure for ML models
+# Actual model files (.h5, .pkl) are ignored but structure is preserved
