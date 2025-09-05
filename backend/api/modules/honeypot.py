@@ -23,16 +23,10 @@ class HoneypotModule:
         
         # Honeypot weights for scoring (total should equal 1.0)
         self.honeypot_weights = {
-            'hidden_field': 0.25,     # CSS hidden field detection
-            'fake_submit': 0.25,      # Invisible submit button
-            'optional_field': 0.2,    # JS-based detection
-            'focus_order': 0.15,      # Focus order violation
-            'offscreen_mouse': 0.15   # Offscreen mouse decoy
+            'hidden_field': 0.4,     # Strongest indicator - only bots should see this
+            'fake_submit': 0.3,      # Strong indicator - invisible to humans
+            'optional_field': 0.3    # Moderate indicator - JS-based detection
         }
-        
-        # STRICT RULE: Any single honeypot trigger = bot detected
-        self.strict_mode = True
-        self.any_trigger_threshold = 0.1  # If any honeypot triggers, immediate bot detection
         
         # Thresholds
         self.suspicious_threshold = 0.3  # Lower threshold for honeypot-based detection
@@ -40,7 +34,6 @@ class HoneypotModule:
         
         print(f"🍯 Enhanced Honeypot Module v{self.version} initialized")
         print(f"🎯 Honeypot mechanisms: {list(self.honeypot_weights.keys())}")
-        print(f"🚨 Strict mode: {'ENABLED' if self.strict_mode else 'DISABLED'} - Any trigger = Bot")
     
     def analyze(self, events, metadata=None):
         """
@@ -118,9 +111,7 @@ class HoneypotModule:
         detailed_results = {
             'hidden_field': {'triggered': False, 'score': 0.0, 'details': ''},
             'fake_submit': {'triggered': False, 'score': 0.0, 'details': ''},
-            'optional_field': {'triggered': False, 'score': 0.0, 'details': ''},
-            'focus_order': {'triggered': False, 'score': 0.0, 'details': ''},
-            'offscreen_mouse': {'triggered': False, 'score': 0.0, 'details': ''}
+            'optional_field': {'triggered': False, 'score': 0.0, 'details': ''}
         }
         
         # 1. Hidden CSS Field Detection (Weight: 0.4)
@@ -147,7 +138,7 @@ class HoneypotModule:
             indicators.append('fake_submit_clicked')
             print("🎯 HONEYPOT TRIGGERED: Fake submit button clicked")
         
-        # 3. JS-based Optional Field Detection (Weight: 0.2)
+        # 3. JS-based Optional Field Detection (Weight: 0.3)
         js_field_value = metadata.get('js_optional_field', '')
         js_enabled = metadata.get('js_enabled', True)
         
@@ -162,84 +153,6 @@ class HoneypotModule:
             indicators.append('js_field_no_js')
             print("🎯 HONEYPOT TRIGGERED: JS field filled without JavaScript")
         
-        # 4. Focus Order Honeypot Detection (Weight: 0.15) - HUMAN-FRIENDLY
-        focus_trail = metadata.get('focus_trail', [])
-        expected_order = metadata.get('expected_focus_order', [])
-        
-        if len(focus_trail) >= 6 and len(expected_order) > 0:  # Increased from 3 to 6 - need more data
-            # Check for EXTREME unnatural patterns that only bots would exhibit
-            extreme_violations = 0
-            rapid_back_and_forth = 0
-            
-            # Look for patterns that humans would never do
-            for i in range(2, len(focus_trail)):  # Need at least 3 events
-                current_field = focus_trail[i]
-                previous_field = focus_trail[i-1]
-                before_previous = focus_trail[i-2]
-                
-                if all(f in expected_order for f in [current_field, previous_field, before_previous]):
-                    # Pattern: A -> B -> A (rapid back-and-forth) - very suspicious
-                    if current_field == before_previous and current_field != previous_field:
-                        rapid_back_and_forth += 1
-                    
-                    # Only flag MASSIVE jumps (like first field to last field repeatedly)
-                    current_index = expected_order.index(current_field)
-                    previous_index = expected_order.index(previous_field)
-                    jump_size = abs(current_index - previous_index)
-                    
-                    if jump_size >= 4:  # Only extreme jumps
-                        extreme_violations += 1
-            
-            # Only trigger for patterns that are clearly non-human
-            if rapid_back_and_forth >= 3 or extreme_violations >= 4:
-                detailed_results['focus_order'] = {
-                    'triggered': True,
-                    'score': 1.0,
-                    'details': f'Extreme bot-like focus: {" -> ".join(focus_trail[-6:])} (rapid: {rapid_back_and_forth}, extreme: {extreme_violations})'
-                }
-                total_score += self.honeypot_weights['focus_order']
-                indicators.append('extreme_bot_focus_pattern')
-                print(f"🎯 HONEYPOT TRIGGERED: Extreme bot-like focus patterns (rapid: {rapid_back_and_forth}, extreme: {extreme_violations})")
-            else:
-                print(f"🟢 Focus order acceptable for human: {len(focus_trail)} events, normal behavior")
-        
-        # 5. Offscreen Mouse Decoy Detection (Weight: 0.15)
-        offscreen_triggered = metadata.get('offscreen_mouse_triggered', False)
-        if offscreen_triggered:
-            detailed_results['offscreen_mouse'] = {
-                'triggered': True,
-                'score': 1.0,
-                'details': 'Mouse entered offscreen decoy element'
-            }
-            total_score += self.honeypot_weights['offscreen_mouse']
-            indicators.append('offscreen_mouse_decoy')
-            print("🎯 HONEYPOT TRIGGERED: Offscreen mouse decoy touched")
-        
-        # STRICT MODE: Only for PRIMARY honeypots that humans should NEVER trigger
-        primary_honeypots_triggered = [
-            r for trap_type, r in detailed_results.items() 
-            if r['triggered'] and trap_type in ['hidden_field', 'fake_submit', 'optional_field']
-        ]
-        secondary_honeypots_triggered = [
-            r for trap_type, r in detailed_results.items() 
-            if r['triggered'] and trap_type in ['focus_order', 'offscreen_mouse']
-        ]
-        
-        total_honeypots_triggered = len(primary_honeypots_triggered) + len(secondary_honeypots_triggered)
-        
-        # STRICT MODE: Only apply to primary honeypots (hidden field, fake submit, JS field)
-        if self.strict_mode and len(primary_honeypots_triggered) > 0:
-            total_score = 1.0  # Maximum score for any primary trigger
-            indicators.append('strict_primary_honeypot_enforcement')
-            print(f"🚨 STRICT MODE: {len(primary_honeypots_triggered)} PRIMARY honeypot(s) triggered - IMMEDIATE BOT DETECTION")
-        elif len(secondary_honeypots_triggered) > 0:
-            # Secondary honeypots add suspicion but don't guarantee bot detection
-            secondary_bonus = len(secondary_honeypots_triggered) * 0.3
-            total_score += secondary_bonus
-            print(f"⚠️ Secondary honeypots triggered: {len(secondary_honeypots_triggered)} (bonus: +{secondary_bonus:.2f})")
-        else:
-            print(f"🟢 No honeypots triggered - normal human behavior")
-        
         # Additional behavioral indicators that support honeypot findings
         if len(events) == 0:
             indicators.append('no_user_interaction')
@@ -249,18 +162,13 @@ class HoneypotModule:
             'total_score': min(total_score, 1.0),
             'indicators': indicators,
             'detailed_results': detailed_results,
-            'honeypots_triggered': total_honeypots_triggered,
-            'primary_honeypots_triggered': len(primary_honeypots_triggered),
-            'secondary_honeypots_triggered': len(secondary_honeypots_triggered),
+            'honeypots_triggered': len([r for r in detailed_results.values() if r['triggered']]),
             'analysis_summary': {
                 'hidden_field_triggered': detailed_results['hidden_field']['triggered'],
                 'fake_submit_triggered': detailed_results['fake_submit']['triggered'],
                 'optional_field_triggered': detailed_results['optional_field']['triggered'],
-                'focus_order_triggered': detailed_results['focus_order']['triggered'],
-                'offscreen_mouse_triggered': detailed_results['offscreen_mouse']['triggered'],
                 'total_honeypot_score': total_score,
-                'threat_assessment': 'HIGH' if total_score >= 0.6 else 'MEDIUM' if total_score >= 0.3 else 'LOW',
-                'strict_mode_applied': len(primary_honeypots_triggered) > 0
+                'threat_assessment': 'HIGH' if total_score >= 0.6 else 'MEDIUM' if total_score >= 0.3 else 'LOW'
             }
         }
     
@@ -350,15 +258,14 @@ class HoneypotModule:
             },
             'honeypot_results': honeypot_results,
             'honeypot_summary': {
-                'total_honeypots': 5,
+                'total_honeypots': 3,
                 'triggered_honeypots': honeypot_results['honeypots_triggered'],
                 'honeypot_score': honeypot_results['total_score'],
-                'detection_method': 'multi_layer_honeypot_strict',
+                'detection_method': 'multi_layer_honeypot',
                 'honeypot_types_triggered': [
                     trap_type for trap_type, details in honeypot_results['detailed_results'].items() 
                     if details['triggered']
-                ],
-                'strict_mode_enabled': self.strict_mode
+                ]
             },
             'module_info': {
                 'module': 'enhanced_honeypot',
@@ -405,14 +312,12 @@ class HoneypotModule:
         return {
             'module': 'enhanced_honeypot',
             'version': self.version,
-            'honeypot_types': ['hidden_css_field', 'fake_submit_button', 'js_optional_field', 'focus_order_tracking', 'offscreen_mouse_decoy'],
+            'honeypot_types': ['hidden_css_field', 'fake_submit_button', 'js_optional_field'],
             'threat_levels': ['low', 'medium', 'high', 'critical'],
             'analysis_features': ['timing_patterns', 'movement_patterns', 'metadata_analysis'],
             'honeypot_weights': self.honeypot_weights,
             'suspicious_threshold': self.suspicious_threshold,
-            'strict_mode': self.strict_mode,
-            'total_honeypots': 5,
-            'description': '5-layer honeypot system with strict enforcement - any trigger = bot detection'
+            'description': '3-layer honeypot system for advanced bot detection'
         }
     
     def get_honeypot_fields(self):
