@@ -1,0 +1,14 @@
+artifact_uri: file:///d:/hack/impostor_detection/impostor_detection/notebooks/mlruns/0/9b351f320ac3456888b5b601f33dadcf/artifacts
+end_time: 1761992543714
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9b351f320ac3456888b5b601f33dadcf
+run_name: clumsy-stork-863
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761992498898
+status: 3
+tags: []
+user_id: Soumyadeep

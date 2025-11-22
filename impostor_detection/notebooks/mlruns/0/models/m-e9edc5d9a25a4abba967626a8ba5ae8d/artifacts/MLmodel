@@ -1,0 +1,22 @@
+artifact_path: file:///d:/hack/impostor_detection/impostor_detection/notebooks/mlruns/0/models/m-e9edc5d9a25a4abba967626a8ba5ae8d/artifacts
+flavors:
+  python_function:
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.tensorflow
+    python_version: 3.12.7
+  tensorflow:
+    code: null
+    data: data
+    keras_version: 2.20.0
+    model_type: keras
+    save_format: tf
+mlflow_version: 3.4.0
+model_id: m-e9edc5d9a25a4abba967626a8ba5ae8d
+model_size_bytes: 322105
+model_uuid: m-e9edc5d9a25a4abba967626a8ba5ae8d
+prompts: null
+run_id: 6fef7201764e4cd6a044bbe04f0e0c8a
+utc_time_created: '2025-10-25 21:23:56.510980'

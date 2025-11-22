@@ -1,0 +1,14 @@
+artifact_uri: file:///d:/hack/impostor_detection/impostor_detection/notebooks/sapimouse/mlruns/0/623c982d2f344de18304d0d5615c924f/artifacts
+end_time: 1762186408339
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 623c982d2f344de18304d0d5615c924f
+run_name: learned-carp-473
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1762186408011
+status: 4
+tags: []
+user_id: Soumyadeep

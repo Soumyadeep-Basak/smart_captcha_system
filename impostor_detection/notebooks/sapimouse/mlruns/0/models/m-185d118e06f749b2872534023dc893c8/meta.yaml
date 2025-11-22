@@ -1,0 +1,11 @@
+artifact_location: file:///d:/hack/impostor_detection/impostor_detection/notebooks/sapimouse/mlruns/0/models/m-185d118e06f749b2872534023dc893c8/artifacts
+creation_timestamp: 1762186392879
+experiment_id: '0'
+last_updated_timestamp: 1762186392879
+lifecycle_stage: active
+model_id: m-185d118e06f749b2872534023dc893c8
+model_type: null
+name: model
+source_run_id: a17bfce7508b406b8b0f61d94caa9af7
+status: 1
+status_message: null

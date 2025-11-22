@@ -1,0 +1,10 @@
+artifact_location: file:///d:/hack/impostor_detection/impostor_detection/notebooks/mlruns/0/models/m-7b5419d2263e43cf98691a373bf626e4/artifacts
+creation_timestamp: 1761419564409
+experiment_id: '0'
+last_updated_timestamp: 1761419706252
+model_id: m-7b5419d2263e43cf98691a373bf626e4
+model_type: null
+name: model
+source_run_id: 195f1f76530f493ba20d3a2cecc25737
+status: 2
+status_message: null
