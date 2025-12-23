@@ -2,59 +2,32 @@
 from datetime import datetime
 import hashlib
 import json
+from config import (
+    FINGERPRINTING_CONFIG, 
+    SUSPICIOUS_PATTERNS,
+    KNOWN_BAD_CANVAS_HASHES,
+    KNOWN_BAD_WEBGL_SIGNATURES,
+    AUTOMATION_SIGNATURES
+)
 
 class FingerprintingModule:
     def __init__(self):
         print("👆 Initializing Enhanced Fingerprinting Module")
-        # Rule-based thresholds for bot detection (Lowered for less aggressive detection)
-        self.thresholds = {
-            'plugins_min': 0,       # Minimum plugins for human (lowered)
-            'mime_types_min': 0,    # Minimum mime types for human (lowered)
-            'screen_min_width': 400,   # Minimum screen width (lowered)
-            'screen_min_height': 300,  # Minimum screen height (lowered)
-            'ua_min_length': 20,    # Minimum user agent length (lowered)
-            'hardware_concurrency_min': 0,  # Minimum CPU cores (lowered)
-            'canvas_min_length': 20,    # Minimum canvas fingerprint length (lowered)
-            'webgl_min_length': 10,     # Minimum WebGL fingerprint length (lowered)
-        }
+        # Load configuration from config module
+        self.thresholds = FINGERPRINTING_CONFIG['thresholds']
+        self.timing_thresholds = FINGERPRINTING_CONFIG['timing_thresholds']
+        self.risk_score_thresholds = FINGERPRINTING_CONFIG['risk_score_thresholds']
         
-        # Suspicious patterns for detection
-        self.suspicious_patterns = [
-            'headless', 'phantom', 'selenium', 'webdriver', 'puppeteer',
-            'chrome-headless', 'chromeless', 'bot', 'crawler', 'spider',
-            'automation', 'script', 'test'
-        ]
+        # Load suspicious patterns from config
+        self.suspicious_patterns = SUSPICIOUS_PATTERNS
         
-        # Known bad canvas/WebGL fingerprints (signatures commonly used by bots)
-        self.known_bad_canvas_hashes = {
-            # Common headless Chrome canvas signatures
-            '6a3f5e2c4b8d7a1f',  # Common headless signature
-            'e4b8c6d2a5f7e9c1',  # Another headless pattern
-            'ffffffffffffffff',  # All-white canvas (common in bots)
-            '0000000000000000',  # All-black canvas (common in bots)
-            'abcdef1234567890',  # Generic test signature
-            '1234567890abcdef',  # Another test pattern
-            # Add more as discovered
-        }
-        
-        self.known_bad_webgl_signatures = {
-            'mesa',  # Common in headless environments
-            'vmware',  # Virtual machine signatures
-            'virtual',  # Virtual GPU signatures
-            'software',  # Software rendering
-            'null',  # Null renderer
-        }
+        # Known bad signatures (can be extended at runtime)
+        self.known_bad_canvas_hashes = set(KNOWN_BAD_CANVAS_HASHES)
+        self.known_bad_webgl_signatures = set(KNOWN_BAD_WEBGL_SIGNATURES)
         
         # Track canvas signatures for duplicate detection
         self.canvas_signature_tracker = {}  # {canvas_hash: [ip_addresses]}
         self.webgl_signature_tracker = {}   # {webgl_signature: [ip_addresses]}
-        
-        # Timing analysis thresholds
-        self.timing_thresholds = {
-            'canvas_render_time_max': 1000,  # Max ms for canvas rendering
-            'webgl_render_time_max': 2000,   # Max ms for WebGL rendering
-            'plugin_enum_time_max': 500,     # Max ms for plugin enumeration
-        }
     
     def analyze_fingerprint(self, metadata=None, browser_fingerprint=None):
         """Enhanced fingerprint analysis with rule-based bot detection"""
@@ -188,17 +161,18 @@ class FingerprintingModule:
             # Apply risk score limits and determine final risk level
             final_risk_score = min(risk_score, 1.0)
             
-            if final_risk_score >= 0.8:
+            risk_thresholds = self.risk_score_thresholds
+            if final_risk_score >= risk_thresholds['high']:
                 risk_level = 'high'
-            elif final_risk_score >= 0.5:
+            elif final_risk_score >= risk_thresholds['medium']:
                 risk_level = 'medium'
-            elif final_risk_score >= 0.3:
+            elif final_risk_score >= risk_thresholds['low']:
                 risk_level = 'low'
             else:
                 risk_level = 'minimal'
             
-            # Bot decision based on risk score
-            is_bot_likely = final_risk_score >= 0.6
+            # Bot decision based on risk score (from config)
+            is_bot_likely = final_risk_score >= risk_thresholds['bot_likely']
             
             result = self._create_enhanced_fingerprint_result(
                 fingerprint_data, risk_level, risk_indicators, final_risk_score, is_bot_likely
@@ -826,22 +800,8 @@ class FingerprintingModule:
         indicators = []
         risk_score = 0.0
         
-        # Check for common automation signatures
-        automation_signatures = [
-            'navigator.webdriver',
-            'window.cdc_',  # Chrome DevTools Protocol
-            '_phantom',
-            '_selenium',
-            'callPhantom',
-            'callSelenium',
-            '__webdriver_script_fn',
-            '__webdriver_evaluate',
-            '__webdriver_unwrapped',
-            '__fxdriver_unwrapped',
-            '__driver_evaluate',
-            '__webdriver_script_func',
-            '__webdriver_script_function'
-        ]
+        # Check for common automation signatures (from config)
+        automation_signatures = AUTOMATION_SIGNATURES
         
         detected_signatures = browser_fingerprint.get('automation_signatures', [])
         for sig in detected_signatures:
@@ -954,39 +914,6 @@ class FingerprintingModule:
         
         # Extract browser and OS info
         browser = 'unknown'
-        os = 'unknown'
-        is_mobile = False
-        
-        if 'chrome' in ua_lower:
-            browser = 'chrome'
-        elif 'firefox' in ua_lower:
-            browser = 'firefox'
-        elif 'safari' in ua_lower and 'chrome' not in ua_lower:
-            browser = 'safari'
-        elif 'edge' in ua_lower:
-            browser = 'edge'
-        
-        if 'windows' in ua_lower:
-            os = 'windows'
-        elif 'mac' in ua_lower:
-            os = 'macos'
-        elif 'linux' in ua_lower:
-            os = 'linux'
-        elif 'android' in ua_lower:
-            os = 'android'
-            is_mobile = True
-        elif 'ios' in ua_lower:
-            os = 'ios'
-            is_mobile = True
-        
-        return {
-            'risk_score': min(risk_score, 1.0),
-            'indicators': indicators,
-            'browser': browser,
-            'os': os,
-            'is_mobile': is_mobile,
-            'raw_user_agent': user_agent
-        }
         os = 'unknown'
         is_mobile = False
         

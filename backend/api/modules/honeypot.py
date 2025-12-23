@@ -13,6 +13,7 @@ Version: 2.0
 from datetime import datetime
 import json
 import re
+from config import HONEYPOT_CONFIG
 
 class HoneypotModule:
     """Enhanced honeypot detection with multiple trap mechanisms"""
@@ -21,16 +22,12 @@ class HoneypotModule:
         self.module_name = 'enhanced_honeypot'
         self.version = '2.0'
         
-        # Honeypot weights for scoring (total should equal 1.0)
-        self.honeypot_weights = {
-            'hidden_field': 0.4,     # Strongest indicator - only bots should see this
-            'fake_submit': 0.3,      # Strong indicator - invisible to humans
-            'optional_field': 0.3    # Moderate indicator - JS-based detection
-        }
-        
-        # Thresholds
-        self.suspicious_threshold = 0.3  # Lower threshold for honeypot-based detection
-        self.high_threat_threshold = 0.6
+        # Load configuration from config module
+        self.honeypot_weights = HONEYPOT_CONFIG['weights']
+        self.suspicious_threshold = HONEYPOT_CONFIG['suspicious_threshold']
+        self.high_threat_threshold = HONEYPOT_CONFIG['high_threat_threshold']
+        self.behavioral_weight = HONEYPOT_CONFIG['behavioral_weight']
+        self.honeypot_weight = HONEYPOT_CONFIG['honeypot_weight']
         
         print(f"🍯 Enhanced Honeypot Module v{self.version} initialized")
         print(f"🎯 Honeypot mechanisms: {list(self.honeypot_weights.keys())}")
@@ -62,9 +59,9 @@ class HoneypotModule:
             movement_score, movement_indicators = self._analyze_movement(events)
             metadata_score, metadata_indicators = self._analyze_metadata(metadata)
             
-            # Combine scores with honeypot priority
+            # Combine scores with honeypot priority (from config)
             behavioral_score = (timing_score + movement_score + metadata_score) / 10.0  # Normalize
-            total_score = (honeypot_score * 0.8) + (behavioral_score * 0.2)  # Prioritize honeypots
+            total_score = (honeypot_score * self.honeypot_weight) + (behavioral_score * self.behavioral_weight)
             
             # Collect all indicators
             threat_indicators = honeypot_results['indicators'] + timing_indicators + movement_indicators + metadata_indicators

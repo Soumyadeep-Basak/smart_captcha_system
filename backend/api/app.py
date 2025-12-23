@@ -7,6 +7,15 @@ import os
 from pathlib import Path
 import logging
 
+# Import configuration
+from config import (
+    MODULE_WEIGHTS,
+    DECISION_THRESHOLDS,
+    HONEYPOT_BONUS,
+    LOGGING_CONFIG,
+    API_CONFIG
+)
+
 # Import our modular functions
 from modules.ml_model import MLModelModule
 from modules.honeypot import HoneypotModule
@@ -42,9 +51,10 @@ def save_prediction(data):
         
         predictions.append(data)
         
-        # Keep only last 1000 predictions to prevent file from getting too large
-        if len(predictions) > 1000:
-            predictions = predictions[-1000:]
+        # Keep only last N predictions to prevent file from getting too large (from config)
+        max_stored = LOGGING_CONFIG['max_predictions_stored']
+        if len(predictions) > max_stored:
+            predictions = predictions[-max_stored:]
         
         with open(PREDICTIONS_FILE, 'w') as f:
             json.dump(predictions, f, indent=2)
@@ -66,7 +76,8 @@ def health():
         'status': 'healthy',
         'service': 'unified_bot_detection_api',
         'timestamp': datetime.utcnow().isoformat() + 'Z',
-        'architecture': 'modular_single_api',
+        'architecture': API_CONFIG['architecture'],
+        'version': API_CONFIG['version'],
         'modules': module_status
     })
 
@@ -197,10 +208,10 @@ def predict():
             
             # API metadata
             'api_metadata': {
-                'architecture': 'modular_single_api',
+                'architecture': API_CONFIG['architecture'],
                 'modules_used': ['ml_model', 'honeypot', 'fingerprinting'],
                 'processing_timestamp': current_timestamp,
-                'version': '3.0'
+                'version': API_CONFIG['version']
             }
         }
         
@@ -271,7 +282,7 @@ def predict():
             }],
             'error': f'API processing error: {str(e)}',
             'api_metadata': {
-                'architecture': 'modular_single_api',
+                'architecture': API_CONFIG['architecture'],
                 'error_fallback': True
             }
         }), 500
@@ -291,12 +302,11 @@ def combine_module_results(ml_result, honeypot_result, fingerprint_result):
         fingerprint_confidence = fingerprint_result['verdict']['confidence']
         fingerprint_risk_score = fingerprint_result['analysis'].get('risk_score', 0)
         
-        # Enhanced weighted decision making with honeypot priority
-        # Honeypot detection is most reliable (45%), ML model (35%), fingerprinting (20%)
-        # Honeypots get highest weight because they detect definitive bot behavior
-        honeypot_weight = 0.45  # Increased from 0.15 - honeypots are most reliable
-        ml_weight = 0.35        # Reduced from 0.50 - ML can have false positives
-        fingerprint_weight = 0.20  # Reduced from 0.35 - supporting evidence
+        # Enhanced weighted decision making with honeypot priority (from config)
+        weights = MODULE_WEIGHTS
+        honeypot_weight = weights['honeypot']
+        ml_weight = weights['ml_model']
+        fingerprint_weight = weights['fingerprint']
         
         # Calculate weighted bot probability
         bot_probability = (
@@ -310,8 +320,9 @@ def combine_module_results(ml_result, honeypot_result, fingerprint_result):
         triggered_honeypots = honeypot_summary.get('triggered_honeypots', 0)
         
         if triggered_honeypots > 0:
-            # Each triggered honeypot adds a bonus
-            honeypot_bonus = triggered_honeypots * 0.15  # 15% per triggered honeypot
+            # Each triggered honeypot adds a bonus (from config)
+            honeypot_bonus = triggered_honeypots * HONEYPOT_BONUS['per_trigger']
+            honeypot_bonus = min(honeypot_bonus, HONEYPOT_BONUS['max_bonus'])
             bot_probability += honeypot_bonus
             logger.info(f"🍯 Honeypot bonus applied: +{honeypot_bonus:.3f} for {triggered_honeypots} triggers")
         
@@ -325,24 +336,25 @@ def combine_module_results(ml_result, honeypot_result, fingerprint_result):
             (honeypot_confidence * honeypot_weight)
         )
         
-        # Enhanced decision threshold with fingerprinting consideration
-        decision_threshold = 0.4
+        # Enhanced decision threshold with fingerprinting consideration (from config)
+        thresholds = DECISION_THRESHOLDS
+        decision_threshold = thresholds['default']
         
         # Special case: If multiple honeypots triggered, immediate bot detection
         if triggered_honeypots >= 2:
-            decision_threshold = 0.1  # Almost guaranteed bot
+            decision_threshold = thresholds['multiple_honeypots']
             logger.info(f"🚨 Multiple honeypots triggered ({triggered_honeypots}/3) - using ultra-sensitive threshold")
         elif triggered_honeypots == 1:
-            decision_threshold = 0.25  # Very likely bot
+            decision_threshold = thresholds['single_honeypot']
             logger.info(f"🚨 Single honeypot triggered - using sensitive threshold")
         
         # Special case: If fingerprinting detects webdriver or very high risk, lower threshold
         high_risk_indicators = fingerprint_result['analysis'].get('risk_indicators', [])
         if 'webdriver_detected' in high_risk_indicators:
-            decision_threshold = min(decision_threshold, 0.2)  # Take minimum of current threshold
+            decision_threshold = min(decision_threshold, thresholds['webdriver_detected'])
             logger.info("🚨 WebDriver detected - using sensitive threshold")
         elif fingerprint_risk_score > 0.8:
-            decision_threshold = min(decision_threshold, 0.3)  # Take minimum of current threshold
+            decision_threshold = min(decision_threshold, thresholds['high_fingerprint_risk'])
             logger.info("🚨 High fingerprint risk - using sensitive threshold")
         
         is_bot = bot_probability > decision_threshold
@@ -432,8 +444,8 @@ def detailed_analysis():
             },
             'combined_analysis': final_decision,
             'api_info': {
-                'architecture': 'modular_single_api_enhanced',
-                'version': '3.1',
+                'architecture': API_CONFIG['architecture'],
+                'version': API_CONFIG['version'],
                 'fingerprinting_features': 'rule_based_enhanced'
             }
         })
@@ -539,7 +551,8 @@ def modules_info():
     """Get information about all modules"""
     return jsonify({
         'api': 'unified_bot_detection',
-        'architecture': 'modular_single_api',
+        'architecture': API_CONFIG['architecture'],
+        'version': API_CONFIG['version'],
         'modules': {
             'ml_model': ml_module.get_info(),
             'honeypot': honeypot_module.get_info(),

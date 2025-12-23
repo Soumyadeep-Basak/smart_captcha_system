@@ -6,10 +6,12 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
+from config import ML_CONFIG
 
 class MLModelModule:
     def __init__(self):
-        self.threshold = 500
+        self.threshold = ML_CONFIG['threshold']
+        self.max_threshold = ML_CONFIG['max_threshold']
         self.model_loaded = False
         self.scaler_loaded = False
         print("🧠 Initializing ML Model Module (Lightweight Mode)")
@@ -113,9 +115,8 @@ class MLModelModule:
             raw_error = float(reconstruction_errors[0])
             
             # PROCESSING FOR DISPLAY: Standardize and invert reconstruction errors
-            # Step 1: Standardize to 0-1 range using 1500 as max threshold
-            max_threshold = 1500.0
-            standardized_errors = np.clip(reconstruction_errors / max_threshold, 0, 1)
+            # Step 1: Standardize to 0-1 range using max_threshold from config
+            standardized_errors = np.clip(reconstruction_errors / self.max_threshold, 0, 1)
             
             # Step 2: Invert the values (1 - standardized_value)
             display_errors = 1.0 - standardized_errors
@@ -130,7 +131,7 @@ class MLModelModule:
             bot_result = bool(is_bot[0])
             
             # CONVERT THRESHOLD TO DISPLAY FORMAT for consistent output
-            threshold_standardized = np.clip(self.threshold / max_threshold, 0, 1)
+            threshold_standardized = np.clip(self.threshold / self.max_threshold, 0, 1)
             threshold_display = 1.0 - threshold_standardized
             
             print(f"🔢 Bot detection threshold: {self.threshold} (raw) -> {threshold_display:.4f} (display)")
@@ -151,7 +152,7 @@ class MLModelModule:
                 'model_status': 'tensorflow_active',
                 'method': 'autoencoder_reconstruction',
                 'processing_details': {
-                    'max_threshold': max_threshold,
+                    'max_threshold': self.max_threshold,
                     'raw_reconstruction_error': raw_error,
                     'standardized_error': float(standardized_errors[0]),
                     'display_error_inverted': display_error,
@@ -227,15 +228,14 @@ class MLModelModule:
             is_bot = raw_error < self.threshold
             
             # APPLY SAME DISPLAY CONVERSION AS TENSORFLOW VERSION
-            # Step 1: Standardize to 0-1 range using 1500 as max threshold
-            max_threshold = 1500.0
-            standardized_error = np.clip(raw_error / max_threshold, 0, 1)
+            # Step 1: Standardize to 0-1 range using max_threshold from config
+            standardized_error = np.clip(raw_error / self.max_threshold, 0, 1)
             
             # Step 2: Invert the values (1 - standardized_value)
             display_error = 1.0 - standardized_error
             
             # Convert threshold to display format too
-            threshold_standardized = np.clip(self.threshold / max_threshold, 0, 1)
+            threshold_standardized = np.clip(self.threshold / self.max_threshold, 0, 1)
             threshold_display = 1.0 - threshold_standardized
             
             # Confidence based on distance from threshold in display format
@@ -261,7 +261,7 @@ class MLModelModule:
                     'logic': 'aggressive_bot_detection'
                 },
                 'processing_details': {
-                    'max_threshold': max_threshold,
+                    'max_threshold': self.max_threshold,
                     'raw_reconstruction_error': raw_error,
                     'standardized_error': float(standardized_error),
                     'display_error_inverted': display_error,
@@ -275,12 +275,12 @@ class MLModelModule:
             
         except Exception as e:
             print(f"❌ Heuristic prediction error: {e}")
-            # Convert error fallback to display format too
+            # Convert error fallback to display format using config
             error_raw = 100.0  # Low error = bot
-            error_standardized = np.clip(error_raw / 1500.0, 0, 1)
+            error_standardized = np.clip(error_raw / self.max_threshold, 0, 1)
             error_display = 1.0 - error_standardized
             
-            threshold_standardized = np.clip(self.threshold / 1500.0, 0, 1)
+            threshold_standardized = np.clip(self.threshold / self.max_threshold, 0, 1)
             threshold_display = 1.0 - threshold_standardized
             
             return {
