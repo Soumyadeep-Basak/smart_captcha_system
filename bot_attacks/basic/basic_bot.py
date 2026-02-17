@@ -5,24 +5,15 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
+from webdriver_manager.chrome import ChromeDriverManager
 
 chrome_options = Options()
 chrome_options.add_argument("-incognito")
 chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
 
-# Try to use ChromeDriver from system PATH, or use webdriver manager
-try:
-    # First try with just 'chromedriver' if it's in PATH
-    service = Service('chromedriver.exe')
-    browser = webdriver.Chrome(service=service, options=chrome_options)
-except:
-    try:
-        # Alternative: let Selenium find ChromeDriver automatically
-        browser = webdriver.Chrome(options=chrome_options)
-    except:
-        # Last resort: use full path
-        service = Service(r'C:\ChromeDriver\chromedriver.exe')
-        browser = webdriver.Chrome(service=service, options=chrome_options)
+# Use webdriver-manager to automatically get the correct ChromeDriver version
+service = Service(ChromeDriverManager().install())
+browser = webdriver.Chrome(service=service, options=chrome_options)
 
 actions = ActionChains(browser)
 

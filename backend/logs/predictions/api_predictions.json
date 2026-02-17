@@ -23022,5 +23022,1624 @@
       "confidence": 0.48359603323284994,
       "raw_error": 0.816373396634
     }
+  },
+  {
+    "timestamp": "2026-02-07T09:06:25.664363Z",
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+      "timestamp": "2026-02-07T09:06:25.664150Z",
+      "screen_resolution": "1536x864",
+      "timezone": "Asia/Calcutta",
+      "language": "en-US",
+      "platform": "Win32",
+      "webdriver_detected": false,
+      "plugins_count": 5,
+      "mime_types_count": 2,
+      "touch_points": 0,
+      "hardware_concurrency": 4,
+      "device_memory": 8
+    },
+    "input_summary": {
+      "mouseMoveCount": 299,
+      "keyPressCount": 167,
+      "events_count": 469
+    },
+    "enhanced_fingerprint": {
+      "browser_fingerprint": {
+        "webdriver_detected": false,
+        "plugins_count": 5,
+        "plugins_list": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "mime_types_count": 2,
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+        "user_agent_length": 111,
+        "suspicious_ua_patterns": [],
+        "screen_width": 1536,
+        "screen_height": 864,
+        "screen_color_depth": 24,
+        "screen_pixel_depth": 24,
+        "suspicious_screen": false,
+        "max_touch_points": 0,
+        "touch_support": false,
+        "language": "en-US",
+        "languages": [
+          "en-US",
+          "en"
+        ],
+        "timezone": "Asia/Calcutta",
+        "hardware_concurrency": 4,
+        "platform": "Win32",
+        "os_cpu": "",
+        "cookie_enabled": true,
+        "do_not_track": "1",
+        "window_outer_width": 1536,
+        "window_outer_height": 816,
+        "window_inner_width": 1536,
+        "window_inner_height": 695,
+        "device_memory": 8,
+        "connection_type": "3g",
+        "connection_downlink": 1.3,
+        "permissions_supported": true,
+        "webgl_vendor": "WebKit",
+        "webgl_renderer": "WebKit WebGL",
+        "webgl_supported": true,
+        "canvas_fingerprint": "AA///k8LypAAAABklEQVQDAAsRukuDo/sCAAAAAElFTkSuQmCC",
+        "canvas_supported": true,
+        "performance_supported": true,
+        "performance_timing_supported": true,
+        "local_storage_supported": true,
+        "session_storage_supported": true,
+        "indexed_db_supported": true,
+        "audio_context_supported": true,
+        "audio_sample_rate": 48000,
+        "battery_supported": true,
+        "gamepad_supported": true,
+        "media_devices_supported": true,
+        "notification_permission": "default",
+        "clipboard_supported": true,
+        "automation_signatures": [
+          "navigator.webdriver"
+        ],
+        "missing_window_properties": [],
+        "phantom_indicators": [],
+        "selenium_indicators": [],
+        "chrome_headless_detected": true,
+        "navigator_properties": {
+          "languages": [
+            "en-US",
+            "en"
+          ],
+          "connection": {
+            "effectiveType": "3g",
+            "downlink": 1.3,
+            "rtt": 300
+          },
+          "cookieEnabled": true,
+          "onLine": true,
+          "doNotTrack": "1"
+        },
+        "iframe_support": true,
+        "fonts_count": 6,
+        "fonts_list": [
+          "Arial",
+          "Times New Roman",
+          "Courier New",
+          "Helvetica",
+          "Georgia",
+          "Verdana"
+        ],
+        "fingerprint_timestamp": 1770455185508
+      },
+      "fingerprint_risk_assessment": {
+        "riskScore": 1,
+        "riskFactors": [
+          "automation_signatures_1",
+          "chrome_headless"
+        ],
+        "riskLevel": "CRITICAL",
+        "isBot": true,
+        "zeroFeaturesCount": 0,
+        "automationSignatures": 1
+      },
+      "feature_summary": {
+        "webdriver_detected": false,
+        "plugins_count": 5,
+        "mime_types_count": 2,
+        "suspicious_screen": false,
+        "suspicious_ua_patterns": []
+      }
+    },
+    "module_results": {
+      "ml_model": {
+        "bot": false,
+        "reconstruction_error": 0.4370070618078534,
+        "confidence": 0.3444894072882199,
+        "raw_error": 0.4370070618078534,
+        "threshold_used": 0.6666666666666667,
+        "decision_logic": "display_error (0.4370) vs threshold (0.6667) | raw_logic: 844.49 < 500 = False",
+        "model_status": "tensorflow_active",
+        "method": "autoencoder_reconstruction",
+        "processing_details": {
+          "max_threshold": 1500.0,
+          "raw_reconstruction_error": 844.4894072882198,
+          "standardized_error": 0.5629929381921466,
+          "display_error_inverted": 0.4370070618078534,
+          "threshold_raw": 500,
+          "threshold_display": 0.6666666666666667,
+          "original_logic": "script2_no_mongo.py"
+        }
+      },
+      "honeypot": {
+        "analysis": {
+          "total_score": 0.004,
+          "honeypot_score": 0.0,
+          "threat_level": "low",
+          "threat_indicators": [
+            "regular_timing"
+          ],
+          "total_indicators": 1,
+          "timestamp": "2026-02-07T09:06:29.507767Z"
+        },
+        "honeypot_verdict": {
+          "is_bot": false,
+          "confidence": 0.5016,
+          "recommendation": "allow",
+          "bot_probability": 0.004
+        },
+        "honeypot_results": {
+          "total_score": 0.0,
+          "indicators": [],
+          "detailed_results": {
+            "hidden_field": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            },
+            "fake_submit": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            },
+            "optional_field": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            }
+          },
+          "honeypots_triggered": 0,
+          "analysis_summary": {
+            "hidden_field_triggered": false,
+            "fake_submit_triggered": false,
+            "optional_field_triggered": false,
+            "total_honeypot_score": 0.0,
+            "threat_assessment": "LOW"
+          }
+        },
+        "honeypot_summary": {
+          "total_honeypots": 3,
+          "triggered_honeypots": 0,
+          "honeypot_score": 0.0,
+          "detection_method": "multi_layer_honeypot",
+          "honeypot_types_triggered": []
+        },
+        "module_info": {
+          "module": "enhanced_honeypot",
+          "version": "2.0",
+          "analysis_method": "behavioral_honeypot_hybrid",
+          "honeypot_types": [
+            "hidden_css_field",
+            "fake_submit_button",
+            "js_optional_field"
+          ],
+          "features_analyzed": [
+            "timing_patterns",
+            "movement_patterns",
+            "metadata_analysis",
+            "honeypot_triggers"
+          ],
+          "weights": {
+            "hidden_field": 0.4,
+            "fake_submit": 0.3,
+            "optional_field": 0.3
+          }
+        }
+      },
+      "fingerprinting": {
+        "fingerprint": {
+          "automation_analysis": {
+            "risk_score": 1.0,
+            "indicators": [
+              "automation_signature_navigator.webdriver",
+              "chrome_headless_confirmed"
+            ],
+            "detected_signatures": [
+              "navigator.webdriver"
+            ],
+            "missing_properties": [],
+            "automation_patterns": 2
+          },
+          "user_agent_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "browser": "chrome",
+            "os": "windows",
+            "is_mobile": false,
+            "raw_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "suspicious_patterns": [],
+            "user_agent_length": 111
+          },
+          "screen_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "screen_width": 1536,
+            "screen_height": 864,
+            "color_depth": 24,
+            "is_suspicious": false
+          },
+          "touch_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "max_touch_points": 0,
+            "touch_support": false
+          },
+          "capabilities_analysis": {
+            "risk_score": 0.4,
+            "indicators": [
+              "canvas_low_entropy"
+            ],
+            "webgl_supported": true,
+            "canvas_supported": true,
+            "audio_context_supported": true,
+            "canvas_analysis": {
+              "risk_score": 0.4,
+              "indicators": [
+                "canvas_low_entropy"
+              ],
+              "is_known_bad": false,
+              "is_duplicate": false,
+              "canvas_hash": "AA///k8LypAAAABk",
+              "canvas_length": 50
+            },
+            "webgl_analysis": {
+              "risk_score": 0.0,
+              "indicators": [],
+              "webgl_vendor": "webkit",
+              "webgl_renderer": "webkit webgl",
+              "webgl_signature": "webkit|webkit webgl"
+            },
+            "timing_analysis": {
+              "risk_score": 0.0,
+              "indicators": [],
+              "canvas_render_time": 0,
+              "webgl_render_time": 0,
+              "plugin_enum_time": 0
+            },
+            "storage_support": {
+              "local_storage": true,
+              "session_storage": true
+            }
+          },
+          "hardware_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "hardware_concurrency": 4,
+            "device_memory": 8
+          },
+          "font_analysis": {
+            "risk_score": 0.4,
+            "indicators": [
+              "very_few_fonts"
+            ],
+            "fonts_count": 6,
+            "font_enum_time": 0
+          },
+          "consistency_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "os_consistent": "",
+            "mobile_consistent": true
+          },
+          "pattern_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "timing_analysis": {
+              "valid_timings_count": 0,
+              "timing_variance": 0
+            }
+          },
+          "ip_analysis": {
+            "risk_score": 0.1,
+            "indicators": [
+              "localhost"
+            ],
+            "type": "localhost",
+            "raw_ip": "127.0.0.1"
+          },
+          "device_hash": "95826efad5a01c22",
+          "raw_fingerprint": {
+            "webdriver_detected": false,
+            "plugins_count": 5,
+            "plugins_list": [
+              "PDF Viewer",
+              "Chrome PDF Viewer",
+              "Chromium PDF Viewer",
+              "Microsoft Edge PDF Viewer",
+              "WebKit built-in PDF"
+            ],
+            "mime_types_count": 2,
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "user_agent_length": 111,
+            "suspicious_ua_patterns": [],
+            "screen_width": 1536,
+            "screen_height": 864,
+            "screen_color_depth": 24,
+            "screen_pixel_depth": 24,
+            "suspicious_screen": false,
+            "max_touch_points": 0,
+            "touch_support": false,
+            "language": "en-US",
+            "languages": [
+              "en-US",
+              "en"
+            ],
+            "timezone": "Asia/Calcutta",
+            "hardware_concurrency": 4,
+            "platform": "Win32",
+            "os_cpu": "",
+            "cookie_enabled": true,
+            "do_not_track": "1",
+            "window_outer_width": 1536,
+            "window_outer_height": 816,
+            "window_inner_width": 1536,
+            "window_inner_height": 695,
+            "device_memory": 8,
+            "connection_type": "3g",
+            "connection_downlink": 1.3,
+            "permissions_supported": true,
+            "webgl_vendor": "WebKit",
+            "webgl_renderer": "WebKit WebGL",
+            "webgl_supported": true,
+            "canvas_fingerprint": "AA///k8LypAAAABklEQVQDAAsRukuDo/sCAAAAAElFTkSuQmCC",
+            "canvas_supported": true,
+            "performance_supported": true,
+            "performance_timing_supported": true,
+            "local_storage_supported": true,
+            "session_storage_supported": true,
+            "indexed_db_supported": true,
+            "audio_context_supported": true,
+            "audio_sample_rate": 48000,
+            "battery_supported": true,
+            "gamepad_supported": true,
+            "media_devices_supported": true,
+            "notification_permission": "default",
+            "clipboard_supported": true,
+            "automation_signatures": [
+              "navigator.webdriver"
+            ],
+            "missing_window_properties": [],
+            "phantom_indicators": [],
+            "selenium_indicators": [],
+            "chrome_headless_detected": true,
+            "navigator_properties": {
+              "languages": [
+                "en-US",
+                "en"
+              ],
+              "connection": {
+                "effectiveType": "3g",
+                "downlink": 1.3,
+                "rtt": 300
+              },
+              "cookieEnabled": true,
+              "onLine": true,
+              "doNotTrack": "1"
+            },
+            "iframe_support": true,
+            "fonts_count": 6,
+            "fonts_list": [
+              "Arial",
+              "Times New Roman",
+              "Courier New",
+              "Helvetica",
+              "Georgia",
+              "Verdana"
+            ],
+            "fingerprint_timestamp": 1770455185508
+          },
+          "feature_counts": {
+            "plugins": 5,
+            "mime_types": 2,
+            "screen_width": 1536,
+            "screen_height": 864,
+            "touch_points": 0,
+            "hardware_concurrency": 4
+          }
+        },
+        "analysis": {
+          "risk_level": "high",
+          "risk_score": 1.0,
+          "risk_indicators": [
+            "automation_signature_navigator.webdriver",
+            "chrome_headless_confirmed",
+            "canvas_low_entropy",
+            "very_few_fonts",
+            "localhost"
+          ],
+          "is_bot_likely": true,
+          "total_indicators": 5,
+          "timestamp": "2026-02-07T09:06:29.510496Z"
+        },
+        "verdict": {
+          "is_suspicious": true,
+          "recommendation": "block",
+          "confidence": 0.8999999999999999,
+          "bot_probability": 1.0
+        },
+        "module_info": {
+          "module": "enhanced_fingerprinting",
+          "analysis_method": "rule_based_heuristics",
+          "features_analyzed": [
+            "webdriver_detection",
+            "plugins_count",
+            "mime_types_count",
+            "user_agent_patterns",
+            "screen_properties",
+            "touch_support",
+            "browser_capabilities",
+            "hardware_info",
+            "ip_address",
+            "canvas_signature",
+            "webgl_signature",
+            "font_enumeration",
+            "behavioral_consistency",
+            "timing_patterns",
+            "advanced_patterns"
+          ],
+          "detection_rules": 8,
+          "suspicious_patterns": 13,
+          "known_bad_signatures": {
+            "canvas_hashes": 6,
+            "webgl_signatures": 5
+          }
+        },
+        "rule_based_analysis": {
+          "thresholds_used": {
+            "plugins_min": 0,
+            "mime_types_min": 0,
+            "screen_min_width": 400,
+            "screen_min_height": 300,
+            "ua_min_length": 20,
+            "hardware_concurrency_min": 0,
+            "canvas_min_length": 20,
+            "webgl_min_length": 10
+          },
+          "pattern_matching": true,
+          "feature_scoring": true,
+          "decision_tree": "if_then_rules"
+        }
+      }
+    },
+    "final_decision": {
+      "is_bot": false,
+      "confidence": 0.5262912925508769,
+      "bot_probability": 0.2,
+      "risk_level": "low",
+      "recommendation": "allow",
+      "decision_threshold": 0.3,
+      "contributing_factors": {
+        "ml_model": {
+          "bot": false,
+          "confidence": 0.3444894072882199,
+          "weight": 0.35
+        },
+        "fingerprinting": {
+          "bot_likely": true,
+          "risk_score": 1.0,
+          "confidence": 0.8999999999999999,
+          "weight": 0.2,
+          "high_risk_indicators": 0
+        },
+        "honeypot": {
+          "bot": false,
+          "confidence": 0.5016,
+          "weight": 0.45
+        }
+      },
+      "decision_logic": "weighted_probability(0.200) > adaptive_threshold(0.3) = False"
+    },
+    "frontend_response": {
+      "bot": false,
+      "reconstruction_error": 0.4370070618078534,
+      "confidence": 0.5262912925508769,
+      "raw_error": 0.4370070618078534
+    }
+  },
+  {
+    "timestamp": "2026-02-07T09:16:53.021086Z",
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+      "timestamp": "2026-02-07T09:16:53.019626Z",
+      "screen_resolution": "1536x864",
+      "timezone": "Asia/Calcutta",
+      "language": "en-US",
+      "platform": "Win32",
+      "webdriver_detected": false,
+      "plugins_count": 5,
+      "mime_types_count": 2,
+      "touch_points": 0,
+      "hardware_concurrency": 4,
+      "device_memory": 8
+    },
+    "input_summary": {
+      "mouseMoveCount": 1119,
+      "keyPressCount": 173,
+      "events_count": 544
+    },
+    "enhanced_fingerprint": {
+      "browser_fingerprint": {
+        "webdriver_detected": false,
+        "plugins_count": 5,
+        "plugins_list": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "mime_types_count": 2,
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+        "user_agent_length": 111,
+        "suspicious_ua_patterns": [],
+        "screen_width": 1536,
+        "screen_height": 864,
+        "screen_color_depth": 24,
+        "screen_pixel_depth": 24,
+        "suspicious_screen": false,
+        "max_touch_points": 0,
+        "touch_support": false,
+        "language": "en-US",
+        "languages": [
+          "en-US",
+          "en"
+        ],
+        "timezone": "Asia/Calcutta",
+        "hardware_concurrency": 4,
+        "platform": "Win32",
+        "os_cpu": "",
+        "cookie_enabled": true,
+        "do_not_track": "1",
+        "window_outer_width": 1536,
+        "window_outer_height": 816,
+        "window_inner_width": 1536,
+        "window_inner_height": 695,
+        "device_memory": 8,
+        "connection_type": "slow-2g",
+        "connection_downlink": 0.15,
+        "permissions_supported": true,
+        "webgl_vendor": "WebKit",
+        "webgl_renderer": "WebKit WebGL",
+        "webgl_supported": true,
+        "canvas_fingerprint": "AA///k8LypAAAABklEQVQDAAsRukuDo/sCAAAAAElFTkSuQmCC",
+        "canvas_supported": true,
+        "performance_supported": true,
+        "performance_timing_supported": true,
+        "local_storage_supported": true,
+        "session_storage_supported": true,
+        "indexed_db_supported": true,
+        "audio_context_supported": true,
+        "audio_sample_rate": 48000,
+        "battery_supported": true,
+        "gamepad_supported": true,
+        "media_devices_supported": true,
+        "notification_permission": "default",
+        "clipboard_supported": true,
+        "automation_signatures": [
+          "navigator.webdriver"
+        ],
+        "missing_window_properties": [],
+        "phantom_indicators": [],
+        "selenium_indicators": [],
+        "chrome_headless_detected": true,
+        "navigator_properties": {
+          "languages": [
+            "en-US",
+            "en"
+          ],
+          "connection": {
+            "effectiveType": "slow-2g",
+            "downlink": 0.15,
+            "rtt": 3000
+          },
+          "cookieEnabled": true,
+          "onLine": true,
+          "doNotTrack": "1"
+        },
+        "iframe_support": true,
+        "fonts_count": 6,
+        "fonts_list": [
+          "Arial",
+          "Times New Roman",
+          "Courier New",
+          "Helvetica",
+          "Georgia",
+          "Verdana"
+        ],
+        "fingerprint_timestamp": 1770455812997
+      },
+      "fingerprint_risk_assessment": {
+        "riskScore": 1,
+        "riskFactors": [
+          "automation_signatures_1",
+          "chrome_headless"
+        ],
+        "riskLevel": "CRITICAL",
+        "isBot": true,
+        "zeroFeaturesCount": 0,
+        "automationSignatures": 1
+      },
+      "feature_summary": {
+        "webdriver_detected": false,
+        "plugins_count": 5,
+        "mime_types_count": 2,
+        "suspicious_screen": false,
+        "suspicious_ua_patterns": []
+      }
+    },
+    "module_results": {
+      "ml_model": {
+        "bot": false,
+        "reconstruction_error": 0.24811021573305625,
+        "confidence": 0.6278346764004157,
+        "raw_error": 0.24811021573305625,
+        "threshold_used": 0.6666666666666667,
+        "decision_logic": "display_error (0.2481) vs threshold (0.6667) | raw_logic: 1127.83 < 500 = False",
+        "model_status": "tensorflow_active",
+        "method": "autoencoder_reconstruction",
+        "processing_details": {
+          "max_threshold": 1500.0,
+          "raw_reconstruction_error": 1127.8346764004157,
+          "standardized_error": 0.7518897842669438,
+          "display_error_inverted": 0.24811021573305625,
+          "threshold_raw": 500,
+          "threshold_display": 0.6666666666666667,
+          "original_logic": "script2_no_mongo.py"
+        }
+      },
+      "honeypot": {
+        "analysis": {
+          "total_score": 0.004,
+          "honeypot_score": 0.0,
+          "threat_level": "low",
+          "threat_indicators": [
+            "regular_timing"
+          ],
+          "total_indicators": 1,
+          "timestamp": "2026-02-07T09:16:53.604230Z"
+        },
+        "honeypot_verdict": {
+          "is_bot": false,
+          "confidence": 0.5016,
+          "recommendation": "allow",
+          "bot_probability": 0.004
+        },
+        "honeypot_results": {
+          "total_score": 0.0,
+          "indicators": [],
+          "detailed_results": {
+            "hidden_field": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            },
+            "fake_submit": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            },
+            "optional_field": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            }
+          },
+          "honeypots_triggered": 0,
+          "analysis_summary": {
+            "hidden_field_triggered": false,
+            "fake_submit_triggered": false,
+            "optional_field_triggered": false,
+            "total_honeypot_score": 0.0,
+            "threat_assessment": "LOW"
+          }
+        },
+        "honeypot_summary": {
+          "total_honeypots": 3,
+          "triggered_honeypots": 0,
+          "honeypot_score": 0.0,
+          "detection_method": "multi_layer_honeypot",
+          "honeypot_types_triggered": []
+        },
+        "module_info": {
+          "module": "enhanced_honeypot",
+          "version": "2.0",
+          "analysis_method": "behavioral_honeypot_hybrid",
+          "honeypot_types": [
+            "hidden_css_field",
+            "fake_submit_button",
+            "js_optional_field"
+          ],
+          "features_analyzed": [
+            "timing_patterns",
+            "movement_patterns",
+            "metadata_analysis",
+            "honeypot_triggers"
+          ],
+          "weights": {
+            "hidden_field": 0.4,
+            "fake_submit": 0.3,
+            "optional_field": 0.3
+          }
+        }
+      },
+      "fingerprinting": {
+        "fingerprint": {
+          "automation_analysis": {
+            "risk_score": 1.0,
+            "indicators": [
+              "automation_signature_navigator.webdriver",
+              "chrome_headless_confirmed"
+            ],
+            "detected_signatures": [
+              "navigator.webdriver"
+            ],
+            "missing_properties": [],
+            "automation_patterns": 2
+          },
+          "user_agent_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "browser": "chrome",
+            "os": "windows",
+            "is_mobile": false,
+            "raw_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "suspicious_patterns": [],
+            "user_agent_length": 111
+          },
+          "screen_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "screen_width": 1536,
+            "screen_height": 864,
+            "color_depth": 24,
+            "is_suspicious": false
+          },
+          "touch_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "max_touch_points": 0,
+            "touch_support": false
+          },
+          "capabilities_analysis": {
+            "risk_score": 0.4,
+            "indicators": [
+              "canvas_low_entropy"
+            ],
+            "webgl_supported": true,
+            "canvas_supported": true,
+            "audio_context_supported": true,
+            "canvas_analysis": {
+              "risk_score": 0.4,
+              "indicators": [
+                "canvas_low_entropy"
+              ],
+              "is_known_bad": false,
+              "is_duplicate": false,
+              "canvas_hash": "AA///k8LypAAAABk",
+              "canvas_length": 50
+            },
+            "webgl_analysis": {
+              "risk_score": 0.0,
+              "indicators": [],
+              "webgl_vendor": "webkit",
+              "webgl_renderer": "webkit webgl",
+              "webgl_signature": "webkit|webkit webgl"
+            },
+            "timing_analysis": {
+              "risk_score": 0.0,
+              "indicators": [],
+              "canvas_render_time": 0,
+              "webgl_render_time": 0,
+              "plugin_enum_time": 0
+            },
+            "storage_support": {
+              "local_storage": true,
+              "session_storage": true
+            }
+          },
+          "hardware_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "hardware_concurrency": 4,
+            "device_memory": 8
+          },
+          "font_analysis": {
+            "risk_score": 0.4,
+            "indicators": [
+              "very_few_fonts"
+            ],
+            "fonts_count": 6,
+            "font_enum_time": 0
+          },
+          "consistency_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "os_consistent": "",
+            "mobile_consistent": true
+          },
+          "pattern_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "timing_analysis": {
+              "valid_timings_count": 0,
+              "timing_variance": 0
+            }
+          },
+          "ip_analysis": {
+            "risk_score": 0.1,
+            "indicators": [
+              "localhost"
+            ],
+            "type": "localhost",
+            "raw_ip": "127.0.0.1"
+          },
+          "device_hash": "95826efad5a01c22",
+          "raw_fingerprint": {
+            "webdriver_detected": false,
+            "plugins_count": 5,
+            "plugins_list": [
+              "PDF Viewer",
+              "Chrome PDF Viewer",
+              "Chromium PDF Viewer",
+              "Microsoft Edge PDF Viewer",
+              "WebKit built-in PDF"
+            ],
+            "mime_types_count": 2,
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "user_agent_length": 111,
+            "suspicious_ua_patterns": [],
+            "screen_width": 1536,
+            "screen_height": 864,
+            "screen_color_depth": 24,
+            "screen_pixel_depth": 24,
+            "suspicious_screen": false,
+            "max_touch_points": 0,
+            "touch_support": false,
+            "language": "en-US",
+            "languages": [
+              "en-US",
+              "en"
+            ],
+            "timezone": "Asia/Calcutta",
+            "hardware_concurrency": 4,
+            "platform": "Win32",
+            "os_cpu": "",
+            "cookie_enabled": true,
+            "do_not_track": "1",
+            "window_outer_width": 1536,
+            "window_outer_height": 816,
+            "window_inner_width": 1536,
+            "window_inner_height": 695,
+            "device_memory": 8,
+            "connection_type": "slow-2g",
+            "connection_downlink": 0.15,
+            "permissions_supported": true,
+            "webgl_vendor": "WebKit",
+            "webgl_renderer": "WebKit WebGL",
+            "webgl_supported": true,
+            "canvas_fingerprint": "AA///k8LypAAAABklEQVQDAAsRukuDo/sCAAAAAElFTkSuQmCC",
+            "canvas_supported": true,
+            "performance_supported": true,
+            "performance_timing_supported": true,
+            "local_storage_supported": true,
+            "session_storage_supported": true,
+            "indexed_db_supported": true,
+            "audio_context_supported": true,
+            "audio_sample_rate": 48000,
+            "battery_supported": true,
+            "gamepad_supported": true,
+            "media_devices_supported": true,
+            "notification_permission": "default",
+            "clipboard_supported": true,
+            "automation_signatures": [
+              "navigator.webdriver"
+            ],
+            "missing_window_properties": [],
+            "phantom_indicators": [],
+            "selenium_indicators": [],
+            "chrome_headless_detected": true,
+            "navigator_properties": {
+              "languages": [
+                "en-US",
+                "en"
+              ],
+              "connection": {
+                "effectiveType": "slow-2g",
+                "downlink": 0.15,
+                "rtt": 3000
+              },
+              "cookieEnabled": true,
+              "onLine": true,
+              "doNotTrack": "1"
+            },
+            "iframe_support": true,
+            "fonts_count": 6,
+            "fonts_list": [
+              "Arial",
+              "Times New Roman",
+              "Courier New",
+              "Helvetica",
+              "Georgia",
+              "Verdana"
+            ],
+            "fingerprint_timestamp": 1770455812997
+          },
+          "feature_counts": {
+            "plugins": 5,
+            "mime_types": 2,
+            "screen_width": 1536,
+            "screen_height": 864,
+            "touch_points": 0,
+            "hardware_concurrency": 4
+          }
+        },
+        "analysis": {
+          "risk_level": "high",
+          "risk_score": 1.0,
+          "risk_indicators": [
+            "automation_signature_navigator.webdriver",
+            "chrome_headless_confirmed",
+            "canvas_low_entropy",
+            "very_few_fonts",
+            "localhost"
+          ],
+          "is_bot_likely": true,
+          "total_indicators": 5,
+          "timestamp": "2026-02-07T09:16:53.605422Z"
+        },
+        "verdict": {
+          "is_suspicious": true,
+          "recommendation": "block",
+          "confidence": 0.8999999999999999,
+          "bot_probability": 1.0
+        },
+        "module_info": {
+          "module": "enhanced_fingerprinting",
+          "analysis_method": "rule_based_heuristics",
+          "features_analyzed": [
+            "webdriver_detection",
+            "plugins_count",
+            "mime_types_count",
+            "user_agent_patterns",
+            "screen_properties",
+            "touch_support",
+            "browser_capabilities",
+            "hardware_info",
+            "ip_address",
+            "canvas_signature",
+            "webgl_signature",
+            "font_enumeration",
+            "behavioral_consistency",
+            "timing_patterns",
+            "advanced_patterns"
+          ],
+          "detection_rules": 8,
+          "suspicious_patterns": 13,
+          "known_bad_signatures": {
+            "canvas_hashes": 6,
+            "webgl_signatures": 5
+          }
+        },
+        "rule_based_analysis": {
+          "thresholds_used": {
+            "plugins_min": 0,
+            "mime_types_min": 0,
+            "screen_min_width": 400,
+            "screen_min_height": 300,
+            "ua_min_length": 20,
+            "hardware_concurrency_min": 0,
+            "canvas_min_length": 20,
+            "webgl_min_length": 10
+          },
+          "pattern_matching": true,
+          "feature_scoring": true,
+          "decision_tree": "if_then_rules"
+        }
+      }
+    },
+    "final_decision": {
+      "is_bot": false,
+      "confidence": 0.6254621367401455,
+      "bot_probability": 0.2,
+      "risk_level": "low",
+      "recommendation": "allow",
+      "decision_threshold": 0.3,
+      "contributing_factors": {
+        "ml_model": {
+          "bot": false,
+          "confidence": 0.6278346764004157,
+          "weight": 0.35
+        },
+        "fingerprinting": {
+          "bot_likely": true,
+          "risk_score": 1.0,
+          "confidence": 0.8999999999999999,
+          "weight": 0.2,
+          "high_risk_indicators": 0
+        },
+        "honeypot": {
+          "bot": false,
+          "confidence": 0.5016,
+          "weight": 0.45
+        }
+      },
+      "decision_logic": "weighted_probability(0.200) > adaptive_threshold(0.3) = False"
+    },
+    "frontend_response": {
+      "bot": false,
+      "reconstruction_error": 0.24811021573305625,
+      "confidence": 0.6254621367401455,
+      "raw_error": 0.24811021573305625
+    }
+  },
+  {
+    "timestamp": "2026-02-07T09:31:22.282342Z",
+    "client_info": {
+      "ip_address": "127.0.0.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+      "timestamp": "2026-02-07T09:31:22.281567Z",
+      "screen_resolution": "1536x864",
+      "timezone": "Asia/Calcutta",
+      "language": "en-US",
+      "platform": "Win32",
+      "webdriver_detected": true,
+      "plugins_count": 5,
+      "mime_types_count": 2,
+      "touch_points": 2,
+      "hardware_concurrency": 4,
+      "device_memory": 8
+    },
+    "input_summary": {
+      "mouseMoveCount": 121,
+      "keyPressCount": 252,
+      "events_count": 374
+    },
+    "enhanced_fingerprint": {
+      "browser_fingerprint": {
+        "webdriver_detected": true,
+        "plugins_count": 5,
+        "plugins_list": [
+          "PDF Viewer",
+          "Chrome PDF Viewer",
+          "Chromium PDF Viewer",
+          "Microsoft Edge PDF Viewer",
+          "WebKit built-in PDF"
+        ],
+        "mime_types_count": 2,
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+        "user_agent_length": 111,
+        "suspicious_ua_patterns": [],
+        "screen_width": 1536,
+        "screen_height": 864,
+        "screen_color_depth": 24,
+        "screen_pixel_depth": 24,
+        "suspicious_screen": false,
+        "max_touch_points": 2,
+        "touch_support": false,
+        "language": "en-US",
+        "languages": [
+          "en-US"
+        ],
+        "timezone": "Asia/Calcutta",
+        "hardware_concurrency": 4,
+        "platform": "Win32",
+        "os_cpu": "",
+        "cookie_enabled": true,
+        "do_not_track": "",
+        "window_outer_width": 1051,
+        "window_outer_height": 798,
+        "window_inner_width": 1036,
+        "window_inner_height": 703,
+        "device_memory": 8,
+        "connection_type": "4g",
+        "connection_downlink": 1.6,
+        "permissions_supported": true,
+        "webgl_vendor": "WebKit",
+        "webgl_renderer": "WebKit WebGL",
+        "webgl_supported": true,
+        "canvas_fingerprint": "AA///k8LypAAAABklEQVQDAAsRukuDo/sCAAAAAElFTkSuQmCC",
+        "canvas_supported": true,
+        "performance_supported": true,
+        "performance_timing_supported": true,
+        "local_storage_supported": true,
+        "session_storage_supported": true,
+        "indexed_db_supported": true,
+        "audio_context_supported": true,
+        "audio_sample_rate": 48000,
+        "battery_supported": true,
+        "gamepad_supported": true,
+        "media_devices_supported": true,
+        "notification_permission": "default",
+        "clipboard_supported": true,
+        "automation_signatures": [
+          "navigator.webdriver",
+          "window.cdc_"
+        ],
+        "missing_window_properties": [],
+        "phantom_indicators": [],
+        "selenium_indicators": [],
+        "chrome_headless_detected": true,
+        "navigator_properties": {
+          "languages": [
+            "en-US"
+          ],
+          "connection": {
+            "effectiveType": "4g",
+            "downlink": 1.6,
+            "rtt": 150
+          },
+          "cookieEnabled": true,
+          "onLine": true,
+          "doNotTrack": null
+        },
+        "iframe_support": true,
+        "fonts_count": 6,
+        "fonts_list": [
+          "Arial",
+          "Times New Roman",
+          "Courier New",
+          "Helvetica",
+          "Georgia",
+          "Verdana"
+        ],
+        "fingerprint_timestamp": 1770456682260
+      },
+      "fingerprint_risk_assessment": {
+        "riskScore": 1,
+        "riskFactors": [
+          "webdriver_detected",
+          "automation_signatures_2",
+          "chrome_headless"
+        ],
+        "riskLevel": "CRITICAL",
+        "isBot": true,
+        "zeroFeaturesCount": 0,
+        "automationSignatures": 2
+      },
+      "feature_summary": {
+        "webdriver_detected": true,
+        "plugins_count": 5,
+        "mime_types_count": 2,
+        "suspicious_screen": false,
+        "suspicious_ua_patterns": []
+      }
+    },
+    "module_results": {
+      "ml_model": {
+        "bot": true,
+        "reconstruction_error": 0.9990135481535202,
+        "confidence": 0.4985203222302801,
+        "raw_error": 0.9990135481535202,
+        "threshold_used": 0.6666666666666667,
+        "decision_logic": "display_error (0.9990) vs threshold (0.6667) | raw_logic: 1.48 < 500 = True",
+        "model_status": "tensorflow_active",
+        "method": "autoencoder_reconstruction",
+        "processing_details": {
+          "max_threshold": 1500.0,
+          "raw_reconstruction_error": 1.4796777697197172,
+          "standardized_error": 0.0009864518464798115,
+          "display_error_inverted": 0.9990135481535202,
+          "threshold_raw": 500,
+          "threshold_display": 0.6666666666666667,
+          "original_logic": "script2_no_mongo.py"
+        }
+      },
+      "honeypot": {
+        "analysis": {
+          "total_score": 0.016,
+          "honeypot_score": 0.0,
+          "threat_level": "low",
+          "threat_indicators": [
+            "rapid_interactions",
+            "regular_timing",
+            "minimal_movement"
+          ],
+          "total_indicators": 3,
+          "timestamp": "2026-02-07T09:31:22.811203Z"
+        },
+        "honeypot_verdict": {
+          "is_bot": false,
+          "confidence": 0.5064,
+          "recommendation": "allow",
+          "bot_probability": 0.016
+        },
+        "honeypot_results": {
+          "total_score": 0.0,
+          "indicators": [],
+          "detailed_results": {
+            "hidden_field": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            },
+            "fake_submit": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            },
+            "optional_field": {
+              "triggered": false,
+              "score": 0.0,
+              "details": ""
+            }
+          },
+          "honeypots_triggered": 0,
+          "analysis_summary": {
+            "hidden_field_triggered": false,
+            "fake_submit_triggered": false,
+            "optional_field_triggered": false,
+            "total_honeypot_score": 0.0,
+            "threat_assessment": "LOW"
+          }
+        },
+        "honeypot_summary": {
+          "total_honeypots": 3,
+          "triggered_honeypots": 0,
+          "honeypot_score": 0.0,
+          "detection_method": "multi_layer_honeypot",
+          "honeypot_types_triggered": []
+        },
+        "module_info": {
+          "module": "enhanced_honeypot",
+          "version": "2.0",
+          "analysis_method": "behavioral_honeypot_hybrid",
+          "honeypot_types": [
+            "hidden_css_field",
+            "fake_submit_button",
+            "js_optional_field"
+          ],
+          "features_analyzed": [
+            "timing_patterns",
+            "movement_patterns",
+            "metadata_analysis",
+            "honeypot_triggers"
+          ],
+          "weights": {
+            "hidden_field": 0.4,
+            "fake_submit": 0.3,
+            "optional_field": 0.3
+          }
+        }
+      },
+      "fingerprinting": {
+        "fingerprint": {
+          "automation_analysis": {
+            "risk_score": 1.0,
+            "indicators": [
+              "automation_signature_navigator.webdriver",
+              "automation_signature_window.cdc_",
+              "chrome_headless_confirmed"
+            ],
+            "detected_signatures": [
+              "navigator.webdriver",
+              "window.cdc_"
+            ],
+            "missing_properties": [],
+            "automation_patterns": 3
+          },
+          "user_agent_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "browser": "chrome",
+            "os": "windows",
+            "is_mobile": false,
+            "raw_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "suspicious_patterns": [],
+            "user_agent_length": 111
+          },
+          "screen_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "screen_width": 1536,
+            "screen_height": 864,
+            "color_depth": 24,
+            "is_suspicious": false
+          },
+          "touch_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "max_touch_points": 2,
+            "touch_support": false
+          },
+          "capabilities_analysis": {
+            "risk_score": 0.4,
+            "indicators": [
+              "canvas_low_entropy"
+            ],
+            "webgl_supported": true,
+            "canvas_supported": true,
+            "audio_context_supported": true,
+            "canvas_analysis": {
+              "risk_score": 0.4,
+              "indicators": [
+                "canvas_low_entropy"
+              ],
+              "is_known_bad": false,
+              "is_duplicate": false,
+              "canvas_hash": "AA///k8LypAAAABk",
+              "canvas_length": 50
+            },
+            "webgl_analysis": {
+              "risk_score": 0.0,
+              "indicators": [],
+              "webgl_vendor": "webkit",
+              "webgl_renderer": "webkit webgl",
+              "webgl_signature": "webkit|webkit webgl"
+            },
+            "timing_analysis": {
+              "risk_score": 0.0,
+              "indicators": [],
+              "canvas_render_time": 0,
+              "webgl_render_time": 0,
+              "plugin_enum_time": 0
+            },
+            "storage_support": {
+              "local_storage": true,
+              "session_storage": true
+            }
+          },
+          "hardware_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "hardware_concurrency": 4,
+            "device_memory": 8
+          },
+          "font_analysis": {
+            "risk_score": 0.4,
+            "indicators": [
+              "very_few_fonts"
+            ],
+            "fonts_count": 6,
+            "font_enum_time": 0
+          },
+          "consistency_analysis": {
+            "risk_score": 0.3,
+            "indicators": [
+              "desktop_ua_with_touch"
+            ],
+            "os_consistent": "",
+            "mobile_consistent": true
+          },
+          "pattern_analysis": {
+            "risk_score": 0.0,
+            "indicators": [],
+            "timing_analysis": {
+              "valid_timings_count": 0,
+              "timing_variance": 0
+            }
+          },
+          "ip_analysis": {
+            "risk_score": 0.1,
+            "indicators": [
+              "localhost"
+            ],
+            "type": "localhost",
+            "raw_ip": "127.0.0.1"
+          },
+          "device_hash": "0edcb31994143c82",
+          "raw_fingerprint": {
+            "webdriver_detected": true,
+            "plugins_count": 5,
+            "plugins_list": [
+              "PDF Viewer",
+              "Chrome PDF Viewer",
+              "Chromium PDF Viewer",
+              "Microsoft Edge PDF Viewer",
+              "WebKit built-in PDF"
+            ],
+            "mime_types_count": 2,
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "user_agent_length": 111,
+            "suspicious_ua_patterns": [],
+            "screen_width": 1536,
+            "screen_height": 864,
+            "screen_color_depth": 24,
+            "screen_pixel_depth": 24,
+            "suspicious_screen": false,
+            "max_touch_points": 2,
+            "touch_support": false,
+            "language": "en-US",
+            "languages": [
+              "en-US"
+            ],
+            "timezone": "Asia/Calcutta",
+            "hardware_concurrency": 4,
+            "platform": "Win32",
+            "os_cpu": "",
+            "cookie_enabled": true,
+            "do_not_track": "",
+            "window_outer_width": 1051,
+            "window_outer_height": 798,
+            "window_inner_width": 1036,
+            "window_inner_height": 703,
+            "device_memory": 8,
+            "connection_type": "4g",
+            "connection_downlink": 1.6,
+            "permissions_supported": true,
+            "webgl_vendor": "WebKit",
+            "webgl_renderer": "WebKit WebGL",
+            "webgl_supported": true,
+            "canvas_fingerprint": "AA///k8LypAAAABklEQVQDAAsRukuDo/sCAAAAAElFTkSuQmCC",
+            "canvas_supported": true,
+            "performance_supported": true,
+            "performance_timing_supported": true,
+            "local_storage_supported": true,
+            "session_storage_supported": true,
+            "indexed_db_supported": true,
+            "audio_context_supported": true,
+            "audio_sample_rate": 48000,
+            "battery_supported": true,
+            "gamepad_supported": true,
+            "media_devices_supported": true,
+            "notification_permission": "default",
+            "clipboard_supported": true,
+            "automation_signatures": [
+              "navigator.webdriver",
+              "window.cdc_"
+            ],
+            "missing_window_properties": [],
+            "phantom_indicators": [],
+            "selenium_indicators": [],
+            "chrome_headless_detected": true,
+            "navigator_properties": {
+              "languages": [
+                "en-US"
+              ],
+              "connection": {
+                "effectiveType": "4g",
+                "downlink": 1.6,
+                "rtt": 150
+              },
+              "cookieEnabled": true,
+              "onLine": true,
+              "doNotTrack": null
+            },
+            "iframe_support": true,
+            "fonts_count": 6,
+            "fonts_list": [
+              "Arial",
+              "Times New Roman",
+              "Courier New",
+              "Helvetica",
+              "Georgia",
+              "Verdana"
+            ],
+            "fingerprint_timestamp": 1770456682260
+          },
+          "feature_counts": {
+            "plugins": 5,
+            "mime_types": 2,
+            "screen_width": 1536,
+            "screen_height": 864,
+            "touch_points": 2,
+            "hardware_concurrency": 4
+          }
+        },
+        "analysis": {
+          "risk_level": "high",
+          "risk_score": 1.0,
+          "risk_indicators": [
+            "webdriver_detected",
+            "automation_signature_navigator.webdriver",
+            "automation_signature_window.cdc_",
+            "chrome_headless_confirmed",
+            "canvas_low_entropy",
+            "very_few_fonts",
+            "desktop_ua_with_touch",
+            "localhost"
+          ],
+          "is_bot_likely": true,
+          "total_indicators": 8,
+          "timestamp": "2026-02-07T09:31:22.812659Z"
+        },
+        "verdict": {
+          "is_suspicious": true,
+          "recommendation": "block",
+          "confidence": 0.8999999999999999,
+          "bot_probability": 1.0
+        },
+        "module_info": {
+          "module": "enhanced_fingerprinting",
+          "analysis_method": "rule_based_heuristics",
+          "features_analyzed": [
+            "webdriver_detection",
+            "plugins_count",
+            "mime_types_count",
+            "user_agent_patterns",
+            "screen_properties",
+            "touch_support",
+            "browser_capabilities",
+            "hardware_info",
+            "ip_address",
+            "canvas_signature",
+            "webgl_signature",
+            "font_enumeration",
+            "behavioral_consistency",
+            "timing_patterns",
+            "advanced_patterns"
+          ],
+          "detection_rules": 8,
+          "suspicious_patterns": 13,
+          "known_bad_signatures": {
+            "canvas_hashes": 6,
+            "webgl_signatures": 5
+          }
+        },
+        "rule_based_analysis": {
+          "thresholds_used": {
+            "plugins_min": 0,
+            "mime_types_min": 0,
+            "screen_min_width": 400,
+            "screen_min_height": 300,
+            "ua_min_length": 20,
+            "hardware_concurrency_min": 0,
+            "canvas_min_length": 20,
+            "webgl_min_length": 10
+          },
+          "pattern_matching": true,
+          "feature_scoring": true,
+          "decision_tree": "if_then_rules"
+        }
+      }
+    },
+    "final_decision": {
+      "is_bot": true,
+      "confidence": 0.582362112780598,
+      "bot_probability": 0.37448211278059806,
+      "risk_level": "low",
+      "recommendation": "block",
+      "decision_threshold": 0.2,
+      "contributing_factors": {
+        "ml_model": {
+          "bot": true,
+          "confidence": 0.4985203222302801,
+          "weight": 0.35
+        },
+        "fingerprinting": {
+          "bot_likely": true,
+          "risk_score": 1.0,
+          "confidence": 0.8999999999999999,
+          "weight": 0.2,
+          "high_risk_indicators": 1
+        },
+        "honeypot": {
+          "bot": false,
+          "confidence": 0.5064,
+          "weight": 0.45
+        }
+      },
+      "decision_logic": "weighted_probability(0.374) > adaptive_threshold(0.2) = True"
+    },
+    "frontend_response": {
+      "bot": true,
+      "reconstruction_error": 0.9990135481535202,
+      "confidence": 0.582362112780598,
+      "raw_error": 0.9990135481535202
+    }
   }
 ]
